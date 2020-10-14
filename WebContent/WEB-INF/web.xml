@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<element>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>Application_Web</display-name>
   <welcome-file-list>
@@ -9,4 +11,54 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  	 <servlet>
+		<servlet-name>home</servlet-name>
+		<servlet-class>fr.zcorp.servlet.home</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>home</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping> 
+	
+	<servlet>
+		<servlet-name>Informatique</servlet-name>
+		<servlet-class>fr.zcorp.servlet.Informatique</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Informatique</servlet-name>
+		<url-pattern>/informatique</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Maths </servlet-name>
+		<servlet-class>fr.zcorp.servlet.Maths</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Maths</servlet-name>
+		<url-pattern>/maths</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Reseau</servlet-name>
+		<servlet-class>fr.zcorp.servlet.Reseau</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Reseau</servlet-name>
+		<url-pattern>/reseau</url-pattern>
+	</servlet-mapping>
+  
+  
+  <jsp-config>
+  	<jsp-property-group>
+  		<url-pattern>*.jsp</url-pattern>
+  		<include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
+  	</jsp-property-group>
+  </jsp-config>
+  
 </web-app>
+</element>
