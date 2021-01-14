@@ -1,0 +1,182 @@
+body {
+    background-color: #ffffff;
+    font-family: "Roboto";
+    font-size: 13px;
+    color: #666666;
+    background-image: url('');
+    background-repeat: repeat-x;
+    background-position: left top;
+}
+
+a{
+    text-decoration: none;
+}
+
+button:focus{
+    outline : none !important;
+    box-shadow: none;
+}
+.wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* header-top */
+
+.header-top {
+    height: 41px;
+    background-color: #f5f5f5;
+    padding-top: 10px;
+}
+.container {
+    max-width: 1600px;
+}
+
+.dash-line {
+    color: #fe3c00;
+    border-bottom: 1px dashed #fe3c00;
+}
+
+#carousel{
+    margin-top: 20px;
+}
+
+/* NavBar */
+
+#navigation{
+    background-color: #2a3c52;
+}
+.fa-shopware{
+    color: #fe3c00;
+}
+.logo{
+    color: #fe3c00;
+}
+
+.navbar-collapse li{
+    font-size: 14px;
+    padding-right: 10px;
+}
+.navbar-collapse .first{
+    padding-left: 15px;
+}
+.navbar-nav ul {
+    text-align: center;
+}
+.user-option{
+    margin-left: 10px;
+}
+.search{
+    margin-right: 60px;
+}
+
+.user-option a{
+    color: #555;
+    padding-right: 30px;
+}
+.item-number{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 20%;
+    background-color: chocolate;
+    color: #fff;
+    font-size: 15px;
+}
+
+#best-category{
+    margin-top: 60px;
+}
+
+#title-category{
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 30px !important;
+}
+.style-description-category{
+    text-align: center;
+    color: #222;
+}
+
+.style-description-category a{
+    color: #222;
+}
+.style-devices{
+    color: #666;
+}
+
+/* Section item Wrap */
+
+#items-wrap{
+    margin-top: 60px;
+}
+
+/* Features Brand */
+
+#feature-brand{
+    margin-top: 60px;
+}
+
+/* Article List */
+
+#article-list{
+    margin-top: 60px;
+    text-align: center;
+}
+
+.title-article{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+.price{
+    color: red;
+    font-size: 16px;
+}
+.middle{
+    margin-top: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+a .btn:focus{
+    outline: none;
+    
+}
+
+#article-list ul li{
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* item-wrap */
+
+#item-wrap{
+    margin-top: 60px;
+}
+
+/* Footer */
+
+footer{
+    margin-top: 50px;
+}
+.get{
+    background-color: #1266f1;
+    color: #fff;
+}
+
+.footer-link{
+    background-color: #2e2e2e;
+    color: #fff;
+}
+
+.footer-copyright{
+    background-color: #222;
+}
