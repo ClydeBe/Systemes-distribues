@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="myBlog_PU" transaction-type="RESOURCE_LOCAL">
+  	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+      
+      <property name="javax.persistence.jdbc.url"    value="jdbc:postgresql://ec2-54-217-206-236.eu-west-1.compute.amazonaws.com:5432/dbr9uhit8cgv4s" />
+      <property name="javax.persistence.jdbc.user" value="wnqhpughgvlczo" />
+      <property name="javax.persistence.jdbc.password" value="6a6bd79718b9729417b3ea30b4d109f76162929b88aef57bb82b3706dc3ad842" />
+       
+       <!--  
+       <property name="javax.persistence.jdbc.url"    value="jdbc:postgresql://localhost:6500/test" />
+      <property name="javax.persistence.jdbc.user" value="postgres" />
+      <property name="javax.persistence.jdbc.password" value="Azerty123" />
+      -->
+      
+      <property name="tomee.jpa.factory.lazy" value="true" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+      <property name='hibernate.hbm2ddl.auto' value='update'/>
+      <property name="hibernate.c3p0.min_size" value="5" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+      <property name="show_sql" value="true"/>
+      <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+    </properties>
+  </persistence-unit>
+</persistence>
