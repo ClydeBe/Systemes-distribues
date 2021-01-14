@@ -28,6 +28,7 @@ namespace GestionAlbum
             if (DataContext is AlbumViewModel a)
             {
                 a.AddTrack();
+                a.setNumber();
             }
         }
 
@@ -36,6 +37,7 @@ namespace GestionAlbum
             if (DataContext is AlbumViewModel a)
             {
                 a.RemoveTrack();
+                a.setNumber();
             }
         }
     }

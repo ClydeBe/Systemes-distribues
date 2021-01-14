@@ -26,7 +26,7 @@ namespace GestionAlbum
 
         }
 
-        private readonly ObservableCollection<AlbumViewModel> _albumSet;
+        private ObservableCollection<AlbumViewModel> _albumSet;
         public ObservableCollection<AlbumViewModel> AlbumSet
         {
             get { SetTrackNumber(); return _albumSet; }
@@ -67,6 +67,7 @@ namespace GestionAlbum
             }
         }
 
+        //Initialisation des numéros de pistes
         private void SetTrackNumber()
         {
             foreach (AlbumViewModel album in _albumSet)

@@ -44,7 +44,7 @@ namespace GestionAlbum
 
         public void AddTrack()
         {
-            if (_toAddTrack != null && _toAddTrack.Equals(""))
+            if (_toAddTrack != null && !_toAddTrack.Equals(""))
                 Tracks.Add(new Track(_toAddTrack));
         }
 
@@ -54,6 +54,15 @@ namespace GestionAlbum
             {
                 Tracks.Remove(SelectedTrack);
                 SelectedTrack = null;
+            }
+        }
+
+        //Mise à jour des numeros de pistes lors de l'ajout
+        public void setNumber()
+        {
+            foreach (Track track in _tracks)
+            {
+                track.Number = _tracks.IndexOf(track) + 1;
             }
         }
     }
