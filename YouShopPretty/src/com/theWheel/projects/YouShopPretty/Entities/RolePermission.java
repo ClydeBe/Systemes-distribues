@@ -1,32 +1,32 @@
-package main.java.com.theWheel.projects.YouShopPretty.Entities;
+package com.theWheel.projects.YouShopPretty.Entities;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_permission", schema = "public")
-public class UserPermission implements Serializable {
-
+@Table(name = "role_permission", schema = "public")
+public class RolePermission implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue()
 	@Column(name = "id_user_permission")
 	Long Id;
 	
-	@Column(name = "user_id")
-	Long userId;
-	
 	@Column(name = "role_id")
 	Long roleId;
+	
+	@Column(name = "permission_id")
+	Long permissionId;
 
-	public UserPermission() {
+	public RolePermission() {
+		super();
 	}
 
 	public Long getId() {
@@ -37,14 +37,6 @@ public class UserPermission implements Serializable {
 		Id = id;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
 	public Long getRoleId() {
 		return roleId;
 	}
@@ -52,6 +44,13 @@ public class UserPermission implements Serializable {
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
-	
-	
+
+	public Long getPermissionId() {
+		return permissionId;
+	}
+
+	public void setPermissionId(Long permissionId) {
+		this.permissionId = permissionId;
+	}
+
 }

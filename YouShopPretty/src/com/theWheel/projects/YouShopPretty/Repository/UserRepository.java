@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import main.java.com.theWheel.projects.YouShopPretty.Entities.User;
+import com.theWheel.projects.YouShopPretty.Entities.User;
 
 public class UserRepository {
 
@@ -16,7 +16,7 @@ public class UserRepository {
 	}
 	
 	public static List<User> getAllUsers() {
-		return em.createQuery("SELECT u FROM user u", User.class).getResultList();
+		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     public static User findById(Long id) {

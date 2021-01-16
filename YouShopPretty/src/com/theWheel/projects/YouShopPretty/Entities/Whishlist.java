@@ -1,4 +1,4 @@
-package main.java.com.theWheel.projects.YouShopPretty.Entities;
+package com.theWheel.projects.YouShopPretty.Entities;
 
 import javax.json.Json;
 import javax.persistence.Column;

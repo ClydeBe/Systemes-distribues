@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
 
-import main.java.com.theWheel.projects.YouShopPretty.Entities.User;
+import com.theWheel.projects.YouShopPretty.Entities.User;
 
 @Path("myresource")
 @Produces(MediaType.APPLICATION_JSON)

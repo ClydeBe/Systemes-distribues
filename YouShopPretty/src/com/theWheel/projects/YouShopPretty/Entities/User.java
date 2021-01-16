@@ -1,7 +1,7 @@
-package main.java.com.theWheel.projects.YouShopPretty.Entities;
+package com.theWheel.projects.YouShopPretty.Entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
