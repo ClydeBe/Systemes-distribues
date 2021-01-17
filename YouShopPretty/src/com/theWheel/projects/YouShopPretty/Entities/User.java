@@ -1,7 +1,7 @@
 package com.theWheel.projects.YouShopPretty.Entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class User implements Serializable {
 	private String firstname;
 	
 	@Column(name = "date_joined")
-	private Date dateJoined;
+	private Timestamp dateJoined;
 	@Column(name = "is_active")
 	private boolean isActive;
 	@Column(name = "is_staff")
@@ -98,12 +98,12 @@ public class User implements Serializable {
 	}
 
 
-	public Date getDateJoined() {
+	public Timestamp getDateJoined() {
 		return dateJoined;
 	}
 
 
-	public void setDateJoined(Date dateJoined) {
+	public void setDateJoined(Timestamp dateJoined) {
 		this.dateJoined = dateJoined;
 	}
 
@@ -137,8 +137,4 @@ public class User implements Serializable {
 		this.isSuperuser = isSuperuser;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 }

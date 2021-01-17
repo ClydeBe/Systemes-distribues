@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
+
 import com.theWheel.projects.YouShopPretty.Entities.User;
 
 public class UserRepository {
@@ -22,22 +24,21 @@ public class UserRepository {
 		return  em.find(User.class, id);
 	}
 
-	public void create(String email, String username, String password1, String password2) {
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		User u = new User();
+	public void create(User user) {
+		EntityTransaction et;
 		try {
-		em.joinTransaction();
-		validateEmail(email);
-		validatePassword(password1, password2);
-		u.setUsername(username);
-		u.setEmail(email);
-		u.setPassword(password2);
-		em.persist(u);
-		et.commit();
+			et = em.getTransaction();
+			et.begin();
+			ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+			passwordEncryptor.setAlgorithm("SHA-256");
+			passwordEncryptor.setPlainDigest( false );
+			String password = passwordEncryptor.encryptPassword(user.getPassword());
+			user.setPassword(password);
+			em.persist(user);
+			et.commit();
 		}
 		catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 
@@ -52,6 +53,11 @@ public class UserRepository {
 
 		em.remove(u);
 	}
+	
+	public boolean usernameExist(String username) {
+		String u = (String) em.createNativeQuery("SELECT username FROM user WHERE username =" + username).getSingleResult();
+		return u == null;
+	}
 
 	//Data validation
 
@@ -65,7 +71,7 @@ public class UserRepository {
 		}
 	}
 
-	
+
 	private void validatePassword( String password1, String password2 ) throws Exception{
 		if (password1 != null && password1.trim().length() != 0 && password2 != null && password2.trim().length() != 0) {
 			if (!password1.equals(password2)) {
