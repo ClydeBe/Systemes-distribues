@@ -3,28 +3,31 @@ package com.theWheel.projects.YouShopPretty.Repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 
 public class UserRepository {
 
+	EntityManager em = EntityManagerProvider.getEntityManager();
 	
-	static EntityManager em = EntityManagerProvider.getEntityManager();
-	
-	
-	private UserRepository() {
+	public UserRepository() {
 	}
 	
-	public static List<User> getAllUsers() {
+	public List<User> getAllUsers() {
 		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    public static User findById(Long id) {
-        return em.find(User.class, id);
+    public User findById(Long id) {
+        return  em.find(User.class, id);
     }
 
     public void create(User u) {
-        em.persist(u);
+    	EntityTransaction et = em.getTransaction();
+    	et.begin();
+    	em.joinTransaction();
+    	em.persist(u);
+    	et.commit();
     }
 
     public void update(User u) {
