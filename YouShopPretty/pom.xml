@@ -18,7 +18,7 @@
 				<artifactId>tomee-maven-plugin</artifactId>
 				<version>8.0.5</version>
 				<configuration>
-					<context>YouShopPretty</context>
+					<context>${project.artifactId}</context>
 					<tomeeClassifier>plume</tomeeClassifier>
 					<tomeeHttpPort>7070</tomeeHttpPort>
 					<tomeeShutdownPort>7075</tomeeShutdownPort>

@@ -40,7 +40,7 @@ public class hmmm {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User u) {
-    	ur.create(u);
+    	//ur.create(u);
     	return Response.ok().build();
     }
 
