@@ -1,5 +1,6 @@
 package com.theWheel.projects.YouShopPretty.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,19 @@ public class ProductRepository {
 	}
 	
 	public List<Product> getByName(String namePattern){
-		TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE lower(p.name) LIKE :name",Product.class);
-		query.setParameter(1, namePattern.toLowerCase());
-		return query.getResultList();
+		List<Product> result = new ArrayList<>();
+		String [] namePatterns = namePattern.trim().split(" ");
+		for(String pattern : namePatterns) {
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE lower(p.name)"
+					+ " LIKE :name OR lower(p.description) LIKE :description OR lower(p.tags) LIKE "
+					+ ":tags OR lower(p.category) LIKE :category",Product.class);
+			query.setParameter(1, pattern.trim().toLowerCase());
+			query.setParameter(2, pattern.trim().toLowerCase());
+			query.setParameter(3, pattern.trim().toLowerCase());
+			query.setParameter(4, pattern.trim().toLowerCase());
+			result.addAll(query.getResultList());
+		}
+		return result;
 	}
 	
 	public List<Product> getByPrinceRange(int min, int max){
@@ -39,6 +50,24 @@ public class ProductRepository {
 		query.setParameter(1, min);
 		query.setParameter(2, max);
 		return query.getResultList();
+	}
+	
+	public List<Product> advanceQuery(String queryPattern, int min, int max){
+		List<Product> result = new ArrayList<>();
+		String [] queryPatterns = queryPattern.trim().split(" ");
+		for(String pattern : queryPatterns) {
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE lower(p.name)"
+					+ " LIKE :name OR lower(p.description) LIKE :description OR lower(p.tags) LIKE "
+					+ ":tags OR lower(p.category) LIKE :category OR lower(p.caracteristics) LIKE "
+					+ ":caracteristics",Product.class);
+			query.setParameter(1, pattern.trim().toLowerCase());
+			query.setParameter(2, pattern.trim().toLowerCase());
+			query.setParameter(3, pattern.trim().toLowerCase());
+			query.setParameter(4, pattern.trim().toLowerCase());
+			result.addAll(query.getResultList());
+		}
+		result.addAll(getByPrinceRange(min, max));
+		return result;
 	}
 	
 	public void create(Product p) {
@@ -57,7 +86,7 @@ public class ProductRepository {
 			et.rollback();
 		}
 		catch(Exception e) {
-			errors.put("Error", "Une erruer est survenue");
+			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
 		finally {

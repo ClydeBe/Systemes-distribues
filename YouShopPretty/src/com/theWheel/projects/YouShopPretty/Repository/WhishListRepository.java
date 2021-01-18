@@ -3,11 +3,11 @@ package com.theWheel.projects.YouShopPretty.Repository;
 import javax.json.Json;
 import javax.persistence.EntityManager;
 
-public class whishListRepository {
+public class WhishListRepository {
 	
 	EntityManager em = EntityManagerProvider.getEntityManager();
 	
-	public whishListRepository(){
+	public WhishListRepository(){
 		
 	}
 

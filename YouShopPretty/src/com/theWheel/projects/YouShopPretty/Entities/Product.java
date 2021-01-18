@@ -25,12 +25,10 @@ public class Product implements Serializable  {
 	public String description;
 	public String name;
 	public String tags;
-	
-
 	public String caracteristics;
-	
-	public String imageLink;
 	public String category;
+	public String images;
+	
 
 	public Product() {
 	}
@@ -92,11 +90,11 @@ public class Product implements Serializable  {
 	}
 
 	public String getImageLink() {
-		return imageLink;
+		return images;
 	}
 
 	public void setImageLink(String imageLink) {
-		this.imageLink = imageLink;
+		this.images = imageLink;
 	}
 
 	public String getCategory() {
