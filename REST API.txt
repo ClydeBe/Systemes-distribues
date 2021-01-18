@@ -1,0 +1,33 @@
+REST API
+	url : /restapi/*
+	
+	Class user	url /account/* 
+		GET all users Authentication required		/
+		GET single user								/id
+		POST	user	Authentication required		/
+		PUT	modify user	Authentication required		/id
+		DELETE	Authentication required				/id
+		
+	Class Product url /products/*
+		GET		producById							/id
+		GET		random product						/random/quantity:int
+		GET		by price							/price:int
+		GET		by name								/name:string
+		GET		research							/query:string
+		POST	add Product auth required			/add
+		PUT					auth required			/id
+		DELETE				auth required			/id
+		
+	Class whishList /whishList/*
+		GET	POST PUT	DELETE
+	
+	Class bill /bill/*
+		GET	POST PUT	DELETE
+		
+	
+	Coté admin uniquement, on aura besoin de :
+	role, permission, user
+	
+	{
+		"name" 
+	}

@@ -10,7 +10,7 @@ public class EntityManagerProvider {
 	
 	public static EntityManager getEntityManager() {
 		if(entityManager == null) {
-		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("myBlog_PU");
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 		 entityManager = emf.createEntityManager();
 		}
 		return entityManager;

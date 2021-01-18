@@ -2,7 +2,6 @@ package com.theWheel.projects.YouShopPretty.Entities;
 
 import java.io.Serializable;
 
-import javax.json.Json;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,16 +18,17 @@ public class Product implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product")
-	Long Id;
+	public Long Id;
 
-	Double price;
-	Long quantity;
-	String description;
-	String name;
-	String tags;
-	Json caracteristics;
-	Json imageLink;
-	String category;
+	public Double price;
+	public Long quantity;
+	public String description;
+	public String name;
+	public String tags;
+	public String caracteristics;
+	public String category;
+	public String images;
+	
 
 	public Product() {
 	}
@@ -81,20 +81,20 @@ public class Product implements Serializable  {
 		this.tags = tags;
 	}
 
-	public Json getCaracteristics() {
+	public String getCaracteristics() {
 		return caracteristics;
 	}
 
-	public void setCaracteristics(Json caracteristics) {
+	public void setCaracteristics(String caracteristics) {
 		this.caracteristics = caracteristics;
 	}
 
-	public Json getImageLink() {
-		return imageLink;
+	public String getImageLink() {
+		return images;
 	}
 
-	public void setImageLink(Json imageLink) {
-		this.imageLink = imageLink;
+	public void setImageLink(String imageLink) {
+		this.images = imageLink;
 	}
 
 	public String getCategory() {
