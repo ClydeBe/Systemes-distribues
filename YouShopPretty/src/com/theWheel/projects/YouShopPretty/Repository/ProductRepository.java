@@ -46,7 +46,7 @@ public class ProductRepository {
 	}
 	
 	public List<Product> getByPrinceRange(int min, int max){
-		TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.price > :min and p.price < :max",Product.class);
+		TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.price BETWEEN :min AND :max",Product.class);
 		query.setParameter(1, min);
 		query.setParameter(2, max);
 		return query.getResultList();
