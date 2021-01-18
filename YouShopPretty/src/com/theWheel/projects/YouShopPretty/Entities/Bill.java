@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.json.Json;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +19,13 @@ public class Bill implements Serializable  {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_bill")
-	Long Id;
+	public Long Id;
 	
 	@Column(name = "user_id")
-	Long userId;
+	public Long userId;
 	
-	Json products;
-	Date date;
+	public String products;
+	public Date date;
 
 	public Bill() {
 	}
@@ -47,11 +46,11 @@ public class Bill implements Serializable  {
 		this.userId = userId;
 	}
 
-	public Json getProducts() {
+	public String getProducts() {
 		return products;
 	}
 
-	public void setProducts(Json products) {
+	public void setProducts(String products) {
 		this.products = products;
 	}
 

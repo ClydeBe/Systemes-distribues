@@ -1,6 +1,5 @@
 package com.theWheel.projects.YouShopPretty.Entities;
 
-import javax.json.Json;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class Whishlist {
 	public Long userId;
 	
 	@Column(name = "products")
-	public Json products;
+	public String products;
 
 	public Long getId() {
 		return Id;
@@ -39,11 +38,11 @@ public class Whishlist {
 		this.userId = userId;
 	}
 
-	public Json getProducts() {
+	public String getProducts() {
 		return products;
 	}
 
-	public void setProducts(Json products) {
+	public void setProducts(String products) {
 		this.products = products;
 	}
 	
