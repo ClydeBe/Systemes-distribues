@@ -23,4 +23,30 @@ public class Whishlist {
 	@Column(name = "products")
 	public Json products;
 
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Json getProducts() {
+		return products;
+	}
+
+	public void setProducts(Json products) {
+		this.products = products;
+	}
+	
+	
+
 }
