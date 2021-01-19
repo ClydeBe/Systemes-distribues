@@ -1,6 +1,7 @@
 package com.theWheel.projects.YouShopPretty.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityExistsException;
@@ -16,6 +17,14 @@ public class PermissionRepository {
 	public Map<String, String> errors = new HashMap<String, String>();
 	
 	public PermissionRepository() {}
+	
+	public List<Permission> getAllPermissions(){
+		return em.createQuery("SELECT p FROM Permission p", Permission.class).getResultList();
+	}
+	
+	public Permission getById(Long id) {
+		return  em.find(Permission.class, id);
+	}
 	
 	public void createPermission(Permission permission) {
 		EntityTransaction et = null;

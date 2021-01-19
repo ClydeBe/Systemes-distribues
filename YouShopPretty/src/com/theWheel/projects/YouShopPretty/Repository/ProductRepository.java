@@ -36,23 +36,23 @@ public class ProductRepository {
 			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE lower(p.name)"
 					+ " LIKE :name OR lower(p.description) LIKE :description OR lower(p.tags) LIKE "
 					+ ":tags OR lower(p.category) LIKE :category",Product.class);
-			query.setParameter(1, pattern.trim().toLowerCase());
-			query.setParameter(2, pattern.trim().toLowerCase());
-			query.setParameter(3, pattern.trim().toLowerCase());
-			query.setParameter(4, pattern.trim().toLowerCase());
+			query.setParameter("name", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("description", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("tags", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("category", "%" + pattern.trim().toLowerCase() + "%");
 			result.addAll(query.getResultList());
 		}
 		return result;
 	}
 	
-	public List<Product> getByPrinceRange(int min, int max){
+	public List<Product> getByPrinceRange(double min, double max){
 		TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.price BETWEEN :min AND :max",Product.class);
-		query.setParameter(1, min);
-		query.setParameter(2, max);
+		query.setParameter("min", min);
+		query.setParameter("max", max);
 		return query.getResultList();
 	}
 	
-	public List<Product> advanceQuery(String queryPattern, int min, int max){
+	public List<Product> advanceQuery(String queryPattern, double min, double max){
 		List<Product> result = new ArrayList<>();
 		String [] queryPatterns = queryPattern.trim().split(" ");
 		for(String pattern : queryPatterns) {
@@ -60,13 +60,15 @@ public class ProductRepository {
 					+ " LIKE :name OR lower(p.description) LIKE :description OR lower(p.tags) LIKE "
 					+ ":tags OR lower(p.category) LIKE :category OR lower(p.caracteristics) LIKE "
 					+ ":caracteristics",Product.class);
-			query.setParameter(1, pattern.trim().toLowerCase());
-			query.setParameter(2, pattern.trim().toLowerCase());
-			query.setParameter(3, pattern.trim().toLowerCase());
-			query.setParameter(4, pattern.trim().toLowerCase());
+			query.setParameter("name", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("description", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("tags", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("category", "%" + pattern.trim().toLowerCase() + "%");
+			query.setParameter("caracteristics", "%" + pattern.trim().toLowerCase() + "%");
 			result.addAll(query.getResultList());
 		}
-		result.addAll(getByPrinceRange(min, max));
+		if(min>0 && max >0)
+			result.addAll(getByPrinceRange(min, max));
 		return result;
 	}
 	

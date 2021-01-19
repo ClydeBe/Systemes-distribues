@@ -51,8 +51,8 @@ public class ProductResource {
 	
 	@GET
 	@Path("advancedsearch/{query}")
-	public Response advanceSearch(@PathParam("query") String query,@QueryParam("min") int min,
-			@QueryParam("max") int max) {
+	public Response advanceSearch(@PathParam("query") String query,@QueryParam("min") double min,
+			@QueryParam("max") double max) {
 		List<Product> p = productRepository.advanceQuery(query, min, max);
 		if(p != null)
 			return Response.ok(p).build();
