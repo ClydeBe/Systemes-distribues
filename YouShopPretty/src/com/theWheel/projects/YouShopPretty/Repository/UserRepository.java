@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
@@ -37,6 +38,23 @@ public class UserRepository {
 		query.setParameter(1, username);
 		return query.getSingleResult();
 	}
+	
+	public Boolean signin(User u) {
+		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+		passwordEncryptor.setAlgorithm("SHA-256");
+		passwordEncryptor.setPlainDigest( false );
+		String password = u.getPassword();
+		String username = u.getUsername();
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+		query.setParameter("username", username);
+		try {
+			User resultingUser = query.getSingleResult();
+			return passwordEncryptor.checkPassword(password, resultingUser.getPassword());
+		}
+		catch(NoResultException e){
+			return false;
+		}
+	}
 
 	// find Users by email
 	public User findByEmail(String email) {
@@ -49,12 +67,12 @@ public class UserRepository {
 	public void createUser(User user) {
 		EntityTransaction et = null;
 		errors.clear();
+		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+		passwordEncryptor.setAlgorithm("SHA-256");
+		passwordEncryptor.setPlainDigest( false );
 		try {
 			et = em.getTransaction();
 			et.begin();
-			ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-			passwordEncryptor.setAlgorithm("SHA-256");
-			passwordEncryptor.setPlainDigest( false );
 			String password = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(password);
 			em.persist(user);

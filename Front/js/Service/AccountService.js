@@ -12,7 +12,7 @@ function get(url = "Account") {
             console.log(JSON.parse(this.responseText));
         }
     };
-    request.open("GET", "http://localhost:80/YouShopPretty/webapi/account/3");
+    request.open("GET", "http://localhost:80/YouShopPretty/webapi/whishList");
     request.send();
 }
 
