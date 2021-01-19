@@ -15,11 +15,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
 
-@Path("Account")
+@Path("account")
 @Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class UserRessource {
@@ -67,15 +68,16 @@ public class UserRessource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addUser(User u) {
 		userRepository.createUser(u);
-		return Response.ok().build();
+		if(userRepository.errors.isEmpty())return Response.status(Status.CREATED).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateUser(User u) {
 		userRepository.update(u);
-		return Response.ok().build();
-	}
+		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();	}
 	
 	@DELETE
 	@Path("{id}")
@@ -83,8 +85,8 @@ public class UserRessource {
 		User u = new User();
 		u.setId(id);
 		userRepository.delete(u);
-		return Response.ok().build();
-
+		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 
 }

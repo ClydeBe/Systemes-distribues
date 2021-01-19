@@ -51,7 +51,7 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 		}
 	}
 	
-	public void updatePermission(RolePermission rolePermission) {
+	public void updateRolePermission(RolePermission rolePermission) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
@@ -71,7 +71,7 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 		}
 	}
 	
-	public void deletePermission(RolePermission rolePermission) {
+	public void deleteRolePermission(RolePermission rolePermission) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {

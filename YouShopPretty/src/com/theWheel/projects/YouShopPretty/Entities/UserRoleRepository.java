@@ -14,7 +14,7 @@ public class UserRoleRepository {
 	
 	EntityManager em = EntityManagerProvider.getEntityManager();
 	
-	Map<String,String> errors = new HashMap<String,String>();
+	public Map<String,String> errors = new HashMap<String,String>();
 	
 	public UserRoleRepository() {}
 	
@@ -50,7 +50,7 @@ public class UserRoleRepository {
 		}
 	}
 	
-	public void updatePermission(UserRole userRole) {
+	public void updateUserRole(UserRole userRole) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
@@ -70,7 +70,7 @@ public class UserRoleRepository {
 		}
 	}
 	
-	public void deletePermission(UserRole userRole) {
+	public void deleteUserRole(UserRole userRole) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {

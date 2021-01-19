@@ -15,7 +15,7 @@ public class UserPermissionRepository {
 	
 	EntityManager em = EntityManagerProvider.getEntityManager();
 	
-	Map<String,String> errors = new HashMap<String,String>();
+	public Map<String,String> errors = new HashMap<String,String>();
 	
 	public UserPermissionRepository() {}
 	
@@ -51,7 +51,7 @@ public class UserPermissionRepository {
 		}
 	}
 	
-	public void updatePermission(UserPermission userPermission) {
+	public void updateUserPermission(UserPermission userPermission) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
@@ -71,7 +71,7 @@ public class UserPermissionRepository {
 		}
 	}
 	
-	public void deletePermission(UserPermission userPermission) {
+	public void deleteUserPermission(UserPermission userPermission) {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
