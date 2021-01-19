@@ -24,7 +24,7 @@ public class UserRessource {
 	UserRepository userRepository = new UserRepository();
 
 //	public UserRessource() {}
-
+	
 	@GET
 	public Response AllUsers() {
 		return Response.ok(userRepository.getAllUsers()).build();
