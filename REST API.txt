@@ -36,6 +36,3 @@ REST API
 	Coté admin uniquement, on aura besoin de :
 	role, permission, user
 	
-	{
-		"name" 
-	}
