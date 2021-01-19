@@ -1,7 +1,10 @@
 package com.theWheel.projects.YouShopPretty.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -13,6 +16,7 @@ import com.theWheel.projects.YouShopPretty.Entities.User;
 public class UserRepository {
 
 	EntityManager em = EntityManagerProvider.getEntityManager();
+	public Map<String, String> errors = new HashMap<String, String>();
 
 	public UserRepository() {
 	}
@@ -44,6 +48,7 @@ public class UserRepository {
 	//insert a User in the database
 	public void createUser(User user) {
 		EntityTransaction et = null;
+		errors.clear();
 		try {
 			et = em.getTransaction();
 			et.begin();
@@ -53,11 +58,21 @@ public class UserRepository {
 			String password = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(password);
 			em.persist(user);
-			et.commit();
 		}
-		catch (Exception e) {
+		catch (EntityExistsException e) {
+			errors.put("Entity_Exist", "Collision : Cet User éxiste déjà");
 			et.rollback();
-			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e) {
+			errors.put("Not_an_entity", "L'objet ajouté n'est pas un User");
+			et.rollback();
+		}
+		catch(Exception e) {
+			errors.put("Error", "Une erreur est survenue");
+			et.rollback();
+		}
+		finally {
+			et.commit();
 		}
 	}
 
@@ -68,9 +83,14 @@ public class UserRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(u);
-			et.commit();
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
+			errors.put("Error", "L'user n'existe pas ou a été retiré");
 			et.rollback();
+		}catch (Exception e) {
+			et.rollback();
+		}
+		finally {
+			et.commit();
 		}
 	}
 
@@ -85,8 +105,16 @@ public class UserRepository {
 			}
 			em.remove(u);
 			et.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch (IllegalArgumentException e) {
+			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
+			et.rollback();
+		}
+		catch(Exception e) {
+			errors.put("Error", "Une erreur est survenue");
+			et.rollback();
+		}
+		finally {
+			et.commit();
 		}
 	}
 

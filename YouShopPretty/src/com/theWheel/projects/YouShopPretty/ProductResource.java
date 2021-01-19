@@ -51,8 +51,8 @@ public class ProductResource {
 	
 	@GET
 	@Path("advancedsearch/{query}")
-	public Response advanceSearch(@PathParam("query") String query,@QueryParam("min") int min,
-			@QueryParam("max") int max) {
+	public Response advanceSearch(@PathParam("query") String query,@QueryParam("min") double min,
+			@QueryParam("max") double max) {
 		List<Product> p = productRepository.advanceQuery(query, min, max);
 		if(p != null)
 			return Response.ok(p).build();
@@ -64,7 +64,7 @@ public class ProductResource {
 		productRepository.create(p);
 		if(productRepository.errors.isEmpty())
 			return Response.status(Status.CREATED).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();
 	}
 	
 	@PUT
@@ -72,7 +72,7 @@ public class ProductResource {
 		productRepository.update(p);
 		if(productRepository.errors.isEmpty())
 			return Response.status(Status.OK).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();
 	}
 	
 	@DELETE
@@ -81,6 +81,6 @@ public class ProductResource {
 		productRepository.delete(p);
 		if(productRepository.errors.isEmpty())
 			return Response.status(Status.OK).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();
 	}
 }

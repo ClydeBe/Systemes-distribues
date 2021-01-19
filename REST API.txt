@@ -25,9 +25,14 @@ REST API
 		GET	POST PUT	DELETE
 		
 	
+	Enpoint admin /admin/*
+		GET POST PUT DELETE	users		/users/
+		GET POST PUT DELETE	permission	/users/permissions
+		GET POST PUT DELETE	roles		/users/roles
+		
+
+
+
 	Coté admin uniquement, on aura besoin de :
 	role, permission, user
 	
-	{
-		"name" 
-	}

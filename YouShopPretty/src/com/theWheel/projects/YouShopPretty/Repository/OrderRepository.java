@@ -9,45 +9,45 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import com.theWheel.projects.YouShopPretty.Entities.Bill;
+import com.theWheel.projects.YouShopPretty.Entities.Order;
 
-public class BillRepository {
-
+public class OrderRepository {
+	
 	EntityManager em = EntityManagerProvider.getEntityManager();
 	public Map<String, String> errors = new HashMap<String, String>();
 	
-	public BillRepository() {
+	public OrderRepository() {
 		
 	}
 	
-	public List<Bill> getAllBills() {
-		return em.createQuery("SELECT b FROM Bill b", Bill.class).getResultList();
+	public List<Order> getAllOrders() {
+		return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
 	}
 
-	//find Users by id
-	public Bill getById(Long id) {
-		return  em.find(Bill.class, id);
+	
+	public Order getById(Long id) {
+		return  em.find(Order.class, id);
 	}
 	
-	public List<Bill> getByUserId(Long id) {
-		TypedQuery<Bill> query = em.createQuery("SELECT b FROM Bill b WHERE b.userId=: userId", Bill.class);
+	public List<Order> getByUserId(Long id) {
+		TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.userId=: userId", Order.class);
 		query.setParameter("userId", id);
 		return query.getResultList();
 	}
 	
-	public void create(Bill b) {
+	public void create(Order o) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
 		try {
 			et.begin();
-			em.persist(b);
+			em.persist(o);
 		}
 		catch (EntityExistsException e) {
-			errors.put("Entity_Exist", "Collision : cette facture existe déjà");
+			errors.put("Entity_Exist", "Collision : Cette commande existe déjà");
 			et.rollback();
 		}
 		catch(IllegalArgumentException e) {
-			errors.put("Not_an_entity", "L'objet ajouté n'est pas une facture");
+			errors.put("Not_an_entity", "L'objet ajouté n'est pas une commande");
 			et.rollback();
 		}
 		catch(Exception e) {
@@ -59,35 +59,34 @@ public class BillRepository {
 		}
 	}
 	
-	public void update(Bill b) {
+	public void update(Order o) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
 		try {
 			et.begin();
-			em.merge(b);
+			em.merge(o);
 		}
 		catch (IllegalArgumentException e) {
-			errors.put("Not_an_entity", "La facture n'existe pas ou a été retiré");
+			errors.put("Not_an_entity", "La commande n'existe pas ou a été retiré");
 			et.rollback();
 		}
 		finally {
 			et.commit();
-		}
-		
+		}	
 	}
 
-	public void delete(Bill b) {
+	public void delete(Order o) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
 		try {
 			et.begin();
-			if (!em.contains(b)) {
-				b = em.merge(b);
+			if (!em.contains(o)) {
+				o = em.merge(o);
 			}
-			em.remove(b);
+			em.remove(o);
 		}
 		catch (IllegalArgumentException e) {
-			errors.put("Not_an_entity", "La facture n'existe pas ou a été retiré");
+			errors.put("Not_an_entity", "La commande n'existe pas ou a été retiré");
 			et.rollback();
 		}
 		catch (Exception e) {

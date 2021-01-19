@@ -52,7 +52,7 @@ public class BillResource {
 		billRepository.create(b);
 		if(billRepository.errors.isEmpty())
 			return Response.status(Status.CREATED).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(billRepository.errors).build();
 	}
 	
 	@PUT
@@ -60,7 +60,7 @@ public class BillResource {
 		billRepository.update(b);
 		if(billRepository.errors.isEmpty())
 			return Response.status(Status.OK).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(billRepository.errors).build();
 	}
 	
 	@DELETE
@@ -69,6 +69,6 @@ public class BillResource {
 		billRepository.delete(b);
 		if(billRepository.errors.isEmpty())
 			return Response.status(Status.OK).build();
-		return Response.status(Status.EXPECTATION_FAILED).build();
+		return Response.status(Status.EXPECTATION_FAILED).entity(billRepository.errors).build();
 	}
 }
