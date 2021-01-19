@@ -1,0 +1,10 @@
+package com.theWheel.projects.YouShopPretty;
+
+import javax.ws.rs.ApplicationPath;
+
+@ApplicationPath("/webapi")
+public class Application {
+	
+	
+
+}

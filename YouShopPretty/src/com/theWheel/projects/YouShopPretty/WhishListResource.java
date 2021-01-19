@@ -1,5 +1,7 @@
 package com.theWheel.projects.YouShopPretty;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +24,11 @@ public class WhishListResource {
 	WhishListRepository whishListRepository = new WhishListRepository();
 	
 	public WhishListResource() {
+	}
+	
+	@GET
+	public List<Whishlist> getAllWhishList() {
+		return whishListRepository.getAllWhishList();
 	}
 	
 	@GET
