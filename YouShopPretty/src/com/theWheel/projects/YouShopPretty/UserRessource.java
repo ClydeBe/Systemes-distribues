@@ -1,9 +1,5 @@
 package com.theWheel.projects.YouShopPretty;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -30,8 +26,8 @@ public class UserRessource {
 //	public UserRessource() {}
 
 	@GET
-	public List<User> AllUsers() {
-		return userRepository.getAllUsers();
+	public Response AllUsers() {
+		return Response.ok(userRepository.getAllUsers()).build();
 	}
 
 	@GET
