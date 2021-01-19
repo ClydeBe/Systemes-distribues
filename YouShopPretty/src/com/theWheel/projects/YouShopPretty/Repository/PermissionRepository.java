@@ -57,7 +57,7 @@ public class PermissionRepository {
 		try {
 			et = em.getTransaction();
 			et.begin();
-			em.persist(permission);
+			em.merge(permission);
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une Permission");

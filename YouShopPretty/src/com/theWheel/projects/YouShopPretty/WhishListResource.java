@@ -1,5 +1,8 @@
 package com.theWheel.projects.YouShopPretty;
 
+import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,11 +13,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.theWheel.projects.YouShopPretty.Entities.Whishlist;
 import com.theWheel.projects.YouShopPretty.Repository.WhishListRepository;
 
 @Path("whishList")
+@RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class WhishListResource {
@@ -22,6 +27,11 @@ public class WhishListResource {
 	WhishListRepository whishListRepository = new WhishListRepository();
 	
 	public WhishListResource() {
+	}
+	
+	@GET
+	public List<Whishlist> getAllWhishList() {
+		return whishListRepository.getAllWhishList();
 	}
 	
 	@GET
@@ -36,13 +46,15 @@ public class WhishListResource {
 	@POST
 	public Response createWhisList(Whishlist whishList) {
 		whishListRepository.createWhisList(whishList);
-		return Response.ok().build();
+		if(whishListRepository.errors.isEmpty()) return Response.status(Status.CREATED).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
 	@PUT
 	public Response update(Whishlist whishList) {
 		whishListRepository.updateWhisList(whishList);
-		return Response.ok().build();
+		if(!whishListRepository.errors.isEmpty()) return Response.status(Status.OK).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
 	@DELETE
@@ -51,7 +63,8 @@ public class WhishListResource {
 		Whishlist whishList = new Whishlist();
 		whishList.setId(id);
 		whishListRepository.deleteWhisList(whishList);
-		return Response.ok().build();
+		if(whishListRepository.errors.isEmpty()) return Response.status(Status.OK).build();
+		return  Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
 	

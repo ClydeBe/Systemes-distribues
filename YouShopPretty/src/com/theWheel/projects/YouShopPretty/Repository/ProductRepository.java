@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import com.theWheel.projects.YouShopPretty.Entities.Product;
 
+
 public class ProductRepository {
 	
 	EntityManager em =EntityManagerProvider.getEntityManager();
@@ -46,6 +47,11 @@ public class ProductRepository {
 	}
 	
 	public List<Product> getByPrinceRange(double min, double max){
+		if(min <= 0 && max > 0 && max < min)
+		{
+			errors.put("Unexpected query param value", "Les valeurs de paramètres ne sont pas cohérentent");
+			return new ArrayList<Product>();
+		}
 		TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.price BETWEEN :min AND :max",Product.class);
 		query.setParameter("min", min);
 		query.setParameter("max", max);
@@ -67,7 +73,7 @@ public class ProductRepository {
 			query.setParameter("caracteristics", "%" + pattern.trim().toLowerCase() + "%");
 			result.addAll(query.getResultList());
 		}
-		if(min>0 && max >0)
+		if(min>=0 && max >0)
 			result.addAll(getByPrinceRange(min, max));
 		return result;
 	}

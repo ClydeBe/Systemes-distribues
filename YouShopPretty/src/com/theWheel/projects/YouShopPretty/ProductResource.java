@@ -24,6 +24,7 @@ import com.theWheel.projects.YouShopPretty.Repository.ProductRepository;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProductResource {
+	
 	ProductRepository productRepository = new ProductRepository();
 	
 	@GET

@@ -1,9 +1,5 @@
 package com.theWheel.projects.YouShopPretty;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,12 +11,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
 
-@Path("Account")
+@Path("account")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class UserRessource {
 
@@ -29,8 +27,8 @@ public class UserRessource {
 //	public UserRessource() {}
 
 	@GET
-	public List<User> AllUsers() {
-		return userRepository.getAllUsers();
+	public Response AllUsers() {
+		return Response.ok(userRepository.getAllUsers()).build();
 	}
 
 	@GET
@@ -62,20 +60,31 @@ public class UserRessource {
 			return Response.noContent().build();
 		return Response.ok(user).build();
 	}
+	
+	//signin
+	
+	@POST
+	@Path("signin")
+	public Response login(User u){
+		boolean correctCredentials = userRepository.signin(u);
+		if(correctCredentials)
+			return Response.ok().build();
+		return Response.status(Status.UNAUTHORIZED).build();
+	}
+	
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addUser(User u) {
 		userRepository.createUser(u);
-		return Response.ok().build();
+		if(userRepository.errors.isEmpty())return Response.status(Status.CREATED).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateUser(User u) {
 		userRepository.update(u);
-		return Response.ok().build();
-	}
+		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();	}
 	
 	@DELETE
 	@Path("{id}")
@@ -83,8 +92,8 @@ public class UserRessource {
 		User u = new User();
 		u.setId(id);
 		userRepository.delete(u);
-		return Response.ok().build();
-
+		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
+		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 
 }

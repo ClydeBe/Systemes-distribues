@@ -1,6 +1,7 @@
 package com.theWheel.projects.YouShopPretty.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityExistsException;
@@ -19,6 +20,7 @@ public class WhishListRepository {
 
 	// Constructor	
 	public WhishListRepository(){
+		
 		
 	}
 	
@@ -74,9 +76,9 @@ public class WhishListRepository {
 	public void deleteWhisList(Whishlist whishlist) {
 		EntityTransaction et = null;
 		try {
+			et = em.getTransaction();
 			et.begin();
-			if(!em.contains(whishlist))
-			em.remove(whishlist);
+			if(em.contains(whishlist))em.remove(whishlist);
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
 			et.rollback();
@@ -95,10 +97,15 @@ public class WhishListRepository {
 		return em.find(Whishlist.class, id);
 	}
 	
+	// Get a WhisList by her id
+	public  List<Whishlist> getAllWhishList() {
+		return em.createQuery("SELECT w FROM Whishlist w",Whishlist.class).getResultList();
+	}
+	
 	// Get a WhisList by the user id
 	public Whishlist getWhishListByUserId(long idUser) {
-		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM whishlist w WHERE w.user_id =: idUser",Whishlist.class);
-		query.setParameter("idUser", idUser);
+		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM Whishlist w WHERE w.user_id =: idUser",Whishlist.class);
+		query.setParameter("1", idUser);
 		return query.getSingleResult();
 	}
 
