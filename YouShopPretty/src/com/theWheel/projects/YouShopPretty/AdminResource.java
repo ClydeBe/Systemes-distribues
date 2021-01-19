@@ -44,6 +44,7 @@ public class AdminResource {
 	/* Requette GET */
 
 	@GET
+	@Path("role")
 	public Response getAllRole() {
 		List<Role> roles = roleRepository.getAllRoles();
 		if(roles.isEmpty()) return Response.noContent().build();
@@ -51,6 +52,7 @@ public class AdminResource {
 	}
 	
 	@GET
+	@Path("permission")
 	public Response getAllpermission() {
 		List<Permission> permission = permissionRepository.getAllPermissions();
 		if(permission.isEmpty()) return Response.noContent().build();
@@ -58,6 +60,7 @@ public class AdminResource {
 	}
 	
 	@GET
+	@Path("userpermission")
 	public Response getAllUserPermission() {
 		List<UserPermission> userPermission = userPermissionRepository.getAllUserPermission();
 		if(userPermission.isEmpty()) return Response.noContent().build();
@@ -67,6 +70,7 @@ public class AdminResource {
 
 	
 	@GET
+	@Path("userrole")
 	public Response getAllUserRole() {
 		List<UserRole> userRole = userRoleRepository.getAllUserRole();
 		if(userRole.isEmpty()) return Response.noContent().build();
@@ -76,6 +80,7 @@ public class AdminResource {
 	/* Requette POST */
 	
 	@POST
+	@Path("role")
 	public Response createRole(Role role) {
 		roleRepository.createRole(role);
 		if(roleRepository.errors.isEmpty()) return Response.status(Status.CREATED).build();
@@ -83,6 +88,7 @@ public class AdminResource {
 	}
 	
 	@POST
+	@Path("permission")
 	public Response createPermission(Permission permission) {
 		permissionRepository.createPermission(permission);
 		if(permissionRepository.errors.isEmpty()) return Response.status(Status.CREATED).build();
@@ -90,6 +96,7 @@ public class AdminResource {
 	}
 	
 	@POST
+	@Path("userpermission")
 	public Response createUserPermission(UserPermission userPermission) {
 		userPermissionRepository.createUserPermission(userPermission);
 		if(userPermissionRepository.errors.isEmpty()) return Response.status(Status.CREATED).build();
@@ -98,6 +105,7 @@ public class AdminResource {
 	
 
 	@POST
+	@Path("userrole")
 	public Response createUserRole(UserRole userRole) {
 		userRoleRepository.createUserRole(userRole);
 		if(userRoleRepository.errors.isEmpty()) return Response.status(Status.CREATED).build();
@@ -107,6 +115,7 @@ public class AdminResource {
 	/* Requette PUT */
 	
 	@PUT
+	@Path("role")
 	public Response updateRole(Role role) {
 		roleRepository.updateRole(role);
 		if(roleRepository.errors.isEmpty()) return Response.ok().build();
@@ -114,6 +123,7 @@ public class AdminResource {
 	}
 	
 	@PUT
+	@Path("permission")
 	public Response updatePermission(Permission permission) {
 		permissionRepository.updatePermission(permission);
 		if(permissionRepository.errors.isEmpty()) return Response.ok().build();
@@ -121,6 +131,7 @@ public class AdminResource {
 	}
 	
 	@PUT
+	@Path("userpermission")
 	public Response updateUserPermission(UserPermission userPermission) {
 		userPermissionRepository.updateUserPermission(userPermission);
 		if(userPermissionRepository.errors.isEmpty()) return Response.ok().build();
@@ -129,6 +140,7 @@ public class AdminResource {
 	
 
 	@PUT
+	@Path("userrole")
 	public Response updateUserRole(UserRole userRole) {
 		userRoleRepository.updateUserRole(userRole);
 		if(userRoleRepository.errors.isEmpty()) return Response.ok().build();
@@ -138,7 +150,7 @@ public class AdminResource {
 	/* Requette DELETE */
 	
 	@DELETE
-	@Path("deleteRole/{id}")
+	@Path("deleterole/{id}")
 	public Response deleteRole(@PathParam("id") long id) {
 		Role role = new Role();
 		role.setId(id);
@@ -148,7 +160,7 @@ public class AdminResource {
 	}
 	
 	@DELETE
-	@Path("deletePermission/{id}")
+	@Path("deletepermission/{id}")
 	public Response deletePermission(@PathParam("id") long id) {
 		Permission permission = new Permission();
 		permission.setId(id);
@@ -158,7 +170,7 @@ public class AdminResource {
 	}
 	
 	@DELETE
-	@Path("deleteUserPermission/{id}")
+	@Path("deleteuserpermission/{id}")
 	public Response deleteUserPermission(@PathParam("id") long id) {
 		UserPermission userPermission = new UserPermission();
 		userPermission.setId(id);
@@ -169,7 +181,7 @@ public class AdminResource {
 	
 
 	@DELETE
-	@Path("deleteUserRole/{id}")
+	@Path("deleteuserrole/{id}")
 	public Response deleteUserRole(@PathParam("id") long id) {
 		UserRole userRole = new UserRole();
 		userRole.setId(id);
