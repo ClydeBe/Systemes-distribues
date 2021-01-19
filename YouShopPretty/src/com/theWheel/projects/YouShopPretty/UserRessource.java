@@ -18,6 +18,7 @@ import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
 
 @Path("account")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class UserRessource {
 
@@ -59,9 +60,20 @@ public class UserRessource {
 			return Response.noContent().build();
 		return Response.ok(user).build();
 	}
+	
+	//signin
+	
+	@POST
+	@Path("signin")
+	public Response login(User u){
+		boolean correctCredentials = userRepository.signin(u);
+		if(correctCredentials)
+			return Response.ok().build();
+		return Response.status(Status.UNAUTHORIZED).build();
+	}
+	
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addUser(User u) {
 		userRepository.createUser(u);
 		if(userRepository.errors.isEmpty())return Response.status(Status.CREATED).build();
@@ -69,7 +81,6 @@ public class UserRessource {
 	}
 	
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateUser(User u) {
 		userRepository.update(u);
 		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
