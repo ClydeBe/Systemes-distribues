@@ -1,9 +1,5 @@
 package com.theWheel.projects.YouShopPretty;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,7 +15,7 @@ import javax.ws.rs.core.Response;
 import com.theWheel.projects.YouShopPretty.Entities.User;
 import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
 
-@Path("Account")
+@Path("account")
 @Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class UserRessource {
@@ -29,8 +25,8 @@ public class UserRessource {
 //	public UserRessource() {}
 
 	@GET
-	public List<User> AllUsers() {
-		return userRepository.getAllUsers();
+	public Response AllUsers() {
+		return Response.ok(userRepository.getAllUsers()).build();
 	}
 
 	@GET
