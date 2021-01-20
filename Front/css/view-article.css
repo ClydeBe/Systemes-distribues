@@ -53,6 +53,7 @@ button:focus{
 
 .item-title{
     font-size: 16px;;
+    font-weight: bold;
 }
 
 .price{
