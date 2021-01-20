@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 
+@Stateless
+@LocalBean
 public class UserRepository {
 
 	EntityManager em = EntityManagerProvider.getEntityManager();
@@ -35,11 +40,20 @@ public class UserRepository {
 	//find Users by username
 	public User findByUsername(String  username) {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username =: username", User.class);
-		query.setParameter(1, username);
-		return query.getSingleResult();
+		query.setParameter("username", username);
+		try{
+			User u = query.getSingleResult();
+			return u;
+		}
+		catch(NoResultException e) {
+			return null ;
+		}
+		catch (Exception e) {
+		}
+		return new User();
 	}
 	
-	public Boolean signin(User u) {
+	public User signin(User u) {
 		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
 		passwordEncryptor.setAlgorithm("SHA-256");
 		passwordEncryptor.setPlainDigest( false );
@@ -49,18 +63,28 @@ public class UserRepository {
 		query.setParameter("username", username);
 		try {
 			User resultingUser = query.getSingleResult();
-			return passwordEncryptor.checkPassword(password, resultingUser.getPassword());
+			if(passwordEncryptor.checkPassword(password, resultingUser.getPassword()))
+				return resultingUser;
 		}
 		catch(NoResultException e){
-			return false;
 		}
+		return null;
 	}
 
 	// find Users by email
 	public User findByEmail(String email) {
 		TypedQuery<User> query =  em.createQuery("SELECT u FROM User u WHERE u.email =: email" , User.class);
 		query.setParameter("email", email);
-		return  query.getSingleResult();
+		try{
+			 User u = query.getSingleResult();
+			return u;
+		}
+		catch(NoResultException e) {
+			return null ;
+		}
+		catch (Exception e) {
+		}
+		return new User();
 	}
 
 	//insert a User in the database
@@ -97,14 +121,17 @@ public class UserRepository {
 	//update a User
 	public void update(User u) {
 		EntityTransaction et = null;
+		errors.clear();
+
 		try {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(u);
 		} catch (IllegalArgumentException e) {
-			errors.put("Error", "L'user n'existe pas ou a été retiré");
+			errors.put("Not_an_entity", "L'user n'existe pas ou a été retiré");
 			et.rollback();
 		}catch (Exception e) {
+			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
 		finally {
@@ -115,6 +142,7 @@ public class UserRepository {
 	//delete a User
 	public void delete(User u) {
 		EntityTransaction et = null;
+		errors.clear();
 		try {
 			et = em.getTransaction();
 			et.begin();
@@ -122,7 +150,6 @@ public class UserRepository {
 				u = em.merge(u);
 			}
 			em.remove(u);
-			et.commit();
 		}catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
 			et.rollback();
@@ -141,30 +168,4 @@ public class UserRepository {
 		return u == null;
 	}
 
-	/* Data validation */
-
-
-	// validateEmail
-	private void validateEmail( String email ) throws Exception {
-		if ( email != null && email.trim().length() != 0 ) {
-			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-				throw new Exception( "Invalid email" );
-			}
-		} else {
-			throw new Exception( "email field can't be empty" );
-		}
-	}
-
-	// validatePassword
-	private void validatePassword( String password1, String password2 ) throws Exception{
-		if (password1 != null && password1.trim().length() != 0 && password2 != null && password2.trim().length() != 0) {
-			if (!password1.equals(password2)) {
-				throw new Exception("Passwords doesn't match");
-			} else if (password1.trim().length() < 7) {
-				throw new Exception("Password must have at least 8 caracters");
-			}
-		} else {
-			throw new Exception("Password is required");
-		}
-	}
 }
