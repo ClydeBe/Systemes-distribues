@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\loicn\OneDrive\Bureau\YouPrettyShop\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\21859738.index
-\YouShopPretty\src
-C:\Users\loicn\OneDrive\Bureau\YouPrettyShop\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2540900540.index
-\YouShopPretty\src
