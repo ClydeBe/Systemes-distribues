@@ -3,21 +3,30 @@
 const domain = "http://localhost:80/YouShopPretty/webapi/"
 
 console.log("ok");
-//Get all users
-function get(url = "Account") {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            console.log("Be");
-            console.log(JSON.parse(this.responseText));
-        }
-    };
-    request.open("GET", "http://localhost:80/YouShopPretty/webapi/whishList");
-    request.send();
-}
 
-get();
 
+
+let jsonBody = {
+    username: "Rantanplan",
+    password: "Rantanplan",
+    email: "gg@gg.gg"
+};
+var request = new XMLHttpRequest();
+request.open("POST", "http://localhost:80/YouShopPretty/webapi/account");
+request.setRequestHeader("Content-Type", "application/json");
+request.addEventListener("load", function () {
+    if (request.status >= 200 && request.status < 400) {
+        // Appelle la fonction callback en lui passant la réponse de la requête
+        console.log("Posted and work")
+    } else {
+        console.error("Some errors");
+    }
+});
+request.addEventListener("error", function () {
+    console.error("Erreur réseau avec l'URL ");
+});
+
+request.send(JSON.stringify(jsonBody));
 
 // Création d'une requête HTTP
 // var req = new XMLHttpRequest();

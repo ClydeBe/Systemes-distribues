@@ -2,6 +2,7 @@ package com.theWheel.projects.YouShopPretty;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,11 +25,13 @@ public class BillResource {
 
 	BillRepository billRepository = new BillRepository();
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	public Response getAllBills() {	
 		return Response.ok(billRepository.getAllBills()).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	@Path("{id}")
 	public Response getById(@PathParam("id") Long id) {
@@ -38,6 +41,7 @@ public class BillResource {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
 	@GET
 	@Path("user/{id}")
 	public Response getByUserId(@PathParam("id") Long id) {
@@ -47,6 +51,7 @@ public class BillResource {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
 	@POST
 	public Response createProduct(Bill b) {
 		billRepository.create(b);
@@ -55,6 +60,7 @@ public class BillResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(billRepository.errors).build();
 	}
 	
+	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
 	@PUT
 	public Response editProduct(Bill b) {
 		billRepository.update(b);
@@ -63,6 +69,7 @@ public class BillResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(billRepository.errors).build();
 	}
 	
+	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
 	@DELETE
 	@Path("{id}")
 	public Response deleteProduct(Bill b) {

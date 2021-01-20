@@ -2,6 +2,7 @@ package com.theWheel.projects.YouShopPretty;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
@@ -43,6 +44,8 @@ public class AdminResource {
 
 	/* Requette GET */
 
+	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	@Path("role")
 	public Response getAllRole() {
@@ -51,6 +54,7 @@ public class AdminResource {
 		return Response.ok(roles).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	@Path("permission")
 	public Response getAllpermission() {
@@ -59,6 +63,7 @@ public class AdminResource {
 		return Response.ok(permission).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	@Path("userpermission")
 	public Response getAllUserPermission() {
@@ -67,8 +72,7 @@ public class AdminResource {
 		return Response.ok(userPermission).build();
 	}
 	
-
-	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	@Path("userrole")
 	public Response getAllUserRole() {
@@ -79,6 +83,7 @@ public class AdminResource {
 	
 	/* Requette POST */
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@POST
 	@Path("role")
 	public Response createRole(Role role) {
@@ -87,6 +92,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(roleRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@POST
 	@Path("permission")
 	public Response createPermission(Permission permission) {
@@ -95,6 +101,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(permissionRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@POST
 	@Path("userpermission")
 	public Response createUserPermission(UserPermission userPermission) {
@@ -103,7 +110,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(userPermissionRepository.errors).build();
 	}
 	
-
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@POST
 	@Path("userrole")
 	public Response createUserRole(UserRole userRole) {
@@ -114,6 +121,7 @@ public class AdminResource {
 	
 	/* Requette PUT */
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@PUT
 	@Path("role")
 	public Response updateRole(Role role) {
@@ -122,6 +130,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(roleRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@PUT
 	@Path("permission")
 	public Response updatePermission(Permission permission) {
@@ -130,6 +139,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(permissionRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@PUT
 	@Path("userpermission")
 	public Response updateUserPermission(UserPermission userPermission) {
@@ -138,7 +148,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(userPermissionRepository.errors).build();
 	}
 	
-
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@PUT
 	@Path("userrole")
 	public Response updateUserRole(UserRole userRole) {
@@ -149,6 +159,7 @@ public class AdminResource {
 	
 	/* Requette DELETE */
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("deleterole/{id}")
 	public Response deleteRole(@PathParam("id") long id) {
@@ -159,6 +170,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(roleRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("deletepermission/{id}")
 	public Response deletePermission(@PathParam("id") long id) {
@@ -169,6 +181,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(permissionRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("deleteuserpermission/{id}")
 	public Response deleteUserPermission(@PathParam("id") long id) {
@@ -179,7 +192,7 @@ public class AdminResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(userPermissionRepository.errors).build();
 	}
 	
-
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("deleteuserrole/{id}")
 	public Response deleteUserRole(@PathParam("id") long id) {
