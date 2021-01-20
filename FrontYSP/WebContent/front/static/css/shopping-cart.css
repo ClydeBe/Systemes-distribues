@@ -1,0 +1,43 @@
+
+body{
+    font-family: "Roboto";
+}
+
+#localisation .container {
+    max-width: 1600px;
+    font-family: "Poppins";
+}
+  
+  #localisation{
+    margin-top: 50px;
+    width: 100%;
+}
+  
+  #localisation .container{
+    background-image: url("background-view-article.jpg");
+    height: 160px;
+}
+  .middle{
+    padding: 60px 0 0;
+    text-align: center;
+    color: white;
+    font-size: 19px;
+    /* padding-top: 4%; */
+} 
+
+/* Product List */
+
+#product-list{
+    margin-top: 3%;
+}
+
+#product-list a{
+    text-decoration: none;
+    color: #222;
+}
+
+#product-list .btn-light{
+    font-weight: bold;
+    background: #e4e4e4;
+    color: #fff;
+}
