@@ -2,6 +2,8 @@ package com.theWheel.projects.YouShopPretty;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,11 +29,13 @@ public class ProductResource {
 	
 	ProductRepository productRepository = new ProductRepository();
 	
+	@PermitAll
 	@GET
 	public Response getAllProducts() {	
 		return Response.ok(productRepository.getAllProducts()).build();
 	}
 	
+	@PermitAll
 	@GET
 	@Path("{id}")
 	public Response getById(@PathParam("id") Long id) {
@@ -41,6 +45,7 @@ public class ProductResource {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	@PermitAll
 	@GET
 	@Path("search/{query}")
 	public Response search(@PathParam("query") String query) {
@@ -50,6 +55,7 @@ public class ProductResource {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	@PermitAll
 	@GET
 	@Path("advancedsearch/{query}")
 	public Response advanceSearch(@PathParam("query") String query,@QueryParam("min") double min,
@@ -60,6 +66,7 @@ public class ProductResource {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@POST
 	public Response createProduct(Product p) {
 		productRepository.create(p);
@@ -68,6 +75,7 @@ public class ProductResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@PUT
 	public Response editProduct(Product p) {
 		productRepository.update(p);
@@ -76,6 +84,7 @@ public class ProductResource {
 		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();
 	}
 	
+	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("{id}")
 	public Response deleteProduct(Product p) {

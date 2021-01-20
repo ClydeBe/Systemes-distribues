@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -14,6 +16,8 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 
+@Stateless
+@LocalBean
 public class UserRepository {
 
 	EntityManager em = EntityManagerProvider.getEntityManager();
@@ -35,11 +39,11 @@ public class UserRepository {
 	//find Users by username
 	public User findByUsername(String  username) {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username =: username", User.class);
-		query.setParameter(1, username);
+		query.setParameter("username", username);
 		return query.getSingleResult();
 	}
 	
-	public Boolean signin(User u) {
+	public User signin(User u) {
 		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
 		passwordEncryptor.setAlgorithm("SHA-256");
 		passwordEncryptor.setPlainDigest( false );
@@ -49,11 +53,12 @@ public class UserRepository {
 		query.setParameter("username", username);
 		try {
 			User resultingUser = query.getSingleResult();
-			return passwordEncryptor.checkPassword(password, resultingUser.getPassword());
+			if(passwordEncryptor.checkPassword(password, resultingUser.getPassword()))
+				return resultingUser;
 		}
 		catch(NoResultException e){
-			return false;
 		}
+		return null;
 	}
 
 	// find Users by email
@@ -122,7 +127,6 @@ public class UserRepository {
 				u = em.merge(u);
 			}
 			em.remove(u);
-			et.commit();
 		}catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
 			et.rollback();
