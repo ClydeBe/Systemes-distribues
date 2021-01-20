@@ -1,0 +1,36 @@
+body {
+    background-color: #ffffff;
+    font-family: "Roboto";
+    font-size: 13px;
+    color: #666666;
+    background-image: url('');
+    background-repeat: repeat-x;
+    background-position: left top;
+}
+
+a{
+    text-decoration: none;
+}
+
+button:focus{
+    outline : none !important;
+    box-shadow: none;
+}
+.wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dash-line {
+    color: #fe3c00;
+    border-bottom: 1px dashed #fe3c00;
+}
+
+.container {
+    max-width: 1600px;
+}
