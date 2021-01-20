@@ -30,15 +30,15 @@ submit.addEventListener("click", (e) => {
     
     let token = "Basic " + btoa(`${username}:${password}`);
 
-    $.ajax({
+    var post = $.ajax({
             url: `${apiDomain}/account/signin`,
             type: 'post',
             contentType: "application/json",
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token);},
             dataType: 'json',
             data: JSON.stringify(logUser),
-        success: function (data, textStatus, request) {
-            let bearerToken = request.getResponseHeader('Authorization');
+        success: function (data, textStatus, response) {
+            let bearerToken = this.getResponseHeader('Authorization');
             console.log(bearerToken)
             let toStore = bearerToken.replace("Bearer ", "");
             document.cookie = `JWT=Bearer ${toStore}`;
