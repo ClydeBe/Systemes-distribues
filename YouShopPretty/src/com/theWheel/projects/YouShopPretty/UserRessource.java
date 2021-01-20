@@ -19,8 +19,8 @@ import javax.ws.rs.core.Response.Status;
 
 import com.theWheel.projects.YouShopPretty.Entities.User;
 import com.theWheel.projects.YouShopPretty.Entities.UserRole;
-import com.theWheel.projects.YouShopPretty.Entities.UserRoleRepository;
 import com.theWheel.projects.YouShopPretty.Repository.UserRepository;
+import com.theWheel.projects.YouShopPretty.Repository.UserRoleRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -58,22 +58,18 @@ public class UserRessource {
 	@GET
 	@Path("validateUsername/{username}")
 	public Response singleUserByUsername(@PathParam("username") String username) {
-		User user;
-		user = userRepository.findByUsername(username);
-		if(user == null)
-			return Response.noContent().build();
-		return Response.ok(user).build();
+		if(userRepository.findByUsername(username) != null)
+			return Response.status(Status.CONFLICT).build();
+		return Response.status(Status.OK).build();
 	}
 	
 	@PermitAll
 	@GET
 	@Path("validateEmail/{email}")
 	public Response singleUserByEmail(@PathParam("email") String email) {
-		User user;
-		user = userRepository.findByEmail(email);
-		if(user == null)
-			return Response.noContent().build();
-		return Response.ok(user).build();
+		if(userRepository.findByEmail(email) != null)
+			return Response.status(Status.CONFLICT).build();
+		return Response.status(Status.OK).build();
 	}
 	
 	//signin and set JWT token

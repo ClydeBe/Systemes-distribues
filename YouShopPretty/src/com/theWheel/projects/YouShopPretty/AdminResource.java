@@ -20,11 +20,11 @@ import com.theWheel.projects.YouShopPretty.Entities.Permission;
 import com.theWheel.projects.YouShopPretty.Entities.Role;
 import com.theWheel.projects.YouShopPretty.Entities.UserPermission;
 import com.theWheel.projects.YouShopPretty.Entities.UserRole;
-import com.theWheel.projects.YouShopPretty.Entities.UserRoleRepository;
 import com.theWheel.projects.YouShopPretty.Repository.PermissionRepository;
 import com.theWheel.projects.YouShopPretty.Repository.RolePermissionRepository;
 import com.theWheel.projects.YouShopPretty.Repository.RoleRepository;
 import com.theWheel.projects.YouShopPretty.Repository.UserPermissionRepository;
+import com.theWheel.projects.YouShopPretty.Repository.UserRoleRepository;
 
 
 @Path("admin")

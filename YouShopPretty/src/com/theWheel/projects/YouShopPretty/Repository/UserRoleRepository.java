@@ -1,4 +1,4 @@
-package com.theWheel.projects.YouShopPretty.Entities;
+package com.theWheel.projects.YouShopPretty.Repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import com.theWheel.projects.YouShopPretty.Repository.EntityManagerProvider;
+import com.theWheel.projects.YouShopPretty.Entities.UserRole;
 
 public class UserRoleRepository {
 	
