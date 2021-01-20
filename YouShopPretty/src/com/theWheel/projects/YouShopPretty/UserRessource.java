@@ -36,6 +36,7 @@ public class UserRessource {
 	
 	UserRepository userRepository = new UserRepository();
 
+
 	@RolesAllowed({"STAFF", "ADMIN"})
 	@GET
 	public Response AllUsers() {

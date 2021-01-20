@@ -102,14 +102,17 @@ public class UserRepository {
 	//update a User
 	public void update(User u) {
 		EntityTransaction et = null;
+		errors.clear();
+
 		try {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(u);
 		} catch (IllegalArgumentException e) {
-			errors.put("Error", "L'user n'existe pas ou a été retiré");
+			errors.put("Not_an_entity", "L'user n'existe pas ou a été retiré");
 			et.rollback();
 		}catch (Exception e) {
+			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
 		finally {
@@ -120,6 +123,7 @@ public class UserRepository {
 	//delete a User
 	public void delete(User u) {
 		EntityTransaction et = null;
+		errors.clear();
 		try {
 			et = em.getTransaction();
 			et.begin();
