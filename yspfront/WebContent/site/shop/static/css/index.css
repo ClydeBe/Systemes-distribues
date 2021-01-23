@@ -80,9 +80,6 @@ button:focus{
     max-width: 1200px;
     padding: 5px 15%;
 }
-.connexion li::first-line{
-   border-right: solid 1px #666666; ;
-}
 
 #search{
     max-width: 500px;

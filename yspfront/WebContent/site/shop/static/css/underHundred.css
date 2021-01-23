@@ -1,0 +1,52 @@
+#article-list{
+    margin-top: 60px;
+}
+#article-list{
+    margin-top: 60px;
+}
+
+#title-category{
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 30px !important;
+}
+
+.title-article{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+#product{
+    text-align: center;
+}
+
+#price{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.middle{
+    margin-top: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#product .card{
+    min-height: 272.062px;
+    max-height: 272.062px;
+}
+
+#product .card img{
+    max-height: 272.062px;
+} 
+
+a .btn:focus{
+    outline: none;
+}
+
+#article-list ul li{
+    text-decoration: none;
+    display: inline-block;
+    color: #ffc000;
+}
