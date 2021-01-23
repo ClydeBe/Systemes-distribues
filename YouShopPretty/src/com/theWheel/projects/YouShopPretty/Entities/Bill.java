@@ -19,13 +19,13 @@ public class Bill implements Serializable  {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_bill")
-	public Long Id;
+	private Long Id;
 	
 	@Column(name = "user_id")
-	public Long userId;
+	private Long userId;
 	
-	public String products;
-	public Date date;
+	private String products;
+	private Date date;
 
 	public Bill() {
 	}

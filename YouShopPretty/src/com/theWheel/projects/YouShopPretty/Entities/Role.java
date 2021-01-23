@@ -17,10 +17,10 @@ public class Role implements Serializable {
 	@Id
 	@GeneratedValue()
 	@Column(name = "id_role")
-	Long Id;
+	private Long Id;
 	
 	@Column(name = "role_name")
-	String roleName;
+	private String roleName;
 
 	public Role() {
 		super();

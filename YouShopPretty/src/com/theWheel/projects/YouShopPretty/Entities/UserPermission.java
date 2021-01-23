@@ -18,13 +18,13 @@ public class UserPermission implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user_permission")
-	Long Id;
+	private Long Id;
 	
 	@Column(name = "user_id")
-	Long userId;
+	private Long userId;
 	
 	@Column(name = "role_id")
-	Long roleId;
+	private Long roleId;
 
 	public UserPermission() {
 	}

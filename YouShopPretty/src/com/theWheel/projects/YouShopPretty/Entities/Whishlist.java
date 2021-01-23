@@ -18,13 +18,13 @@ public class Whishlist implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_whishlist")
-	public Long Id;
+	private Long Id;
 	
 	@Column(name = "user_id")
-	public Long userId;
+	private Long userId;
 	
 	@Column(name = "products")
-	public String products;
+	private String products;
 
 	public Long getId() {
 		return Id;

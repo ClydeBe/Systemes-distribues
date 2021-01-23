@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\Users\loicn\OneDrive\Bureau\YouPrettyShop\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1550339441.index
-578442830.index
-1418064125.index
-2589350505.index
-1707370082.index
-2056164298.index

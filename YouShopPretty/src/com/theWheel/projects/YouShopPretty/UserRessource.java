@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -33,6 +34,7 @@ public class UserRessource {
 
 	private static final String AUTHORIZATION_PROPERTY = "Authorization";
 	private static final String AUTHENTICATION_NAME = "Bearer ";
+	private static final String COOKIE_NAME = "JWTsessionId";
 	
 	UserRepository userRepository = new UserRepository();
 
@@ -89,7 +91,9 @@ public class UserRessource {
 					userRole = "CUSTOMER";
 			}
 			String token = issueToken(userRole, user.getUsername());
-			return Response.ok().header(AUTHORIZATION_PROPERTY, AUTHENTICATION_NAME + token).build();
+			return Response.ok()
+					.cookie(new NewCookie(COOKIE_NAME, token))
+					.header(AUTHORIZATION_PROPERTY, AUTHENTICATION_NAME + token).build();
 		}
 		return Response.status(Status.UNAUTHORIZED).build();
 	}
@@ -152,6 +156,7 @@ public class UserRessource {
         		.setId(userName)
                 .setSubject(userRole)
                 .setIssuer("YouSHopPretty")
+                .claim("TMH", "L. JE")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 29*60*1000L))
                 .signWith(SignatureAlgorithm.HS512,secretKey.getBytes() )

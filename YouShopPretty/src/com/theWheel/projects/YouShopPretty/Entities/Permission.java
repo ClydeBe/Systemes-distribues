@@ -17,10 +17,10 @@ public class Permission implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_permission")
-	Long Id;
+	private Long Id;
 	
-	String name;
-	String codeName;
+	private String name;
+	private String codeName;
 
 	public Permission() {
 		super();

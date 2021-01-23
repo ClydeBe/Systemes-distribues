@@ -14,16 +14,16 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_")
-	public Long Id;
+	private Long Id;
 	
 	@Column(name = "user_id")
-	public Long userId;
+	private Long userId;
 	
 	@Column(name = "products")
-	public String products;
+	private String products;
 	
 	@Column(name = "is_processed")
-	public boolean isProcessed;
+	private boolean isProcessed;
 
 	public Order() {
 		super();
