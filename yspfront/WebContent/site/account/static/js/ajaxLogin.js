@@ -21,7 +21,7 @@ submit.addEventListener("click", (e) => {
     logRequest.onreadystatechange = function () {
         if (this.readyState === 4) {
             if (this.status == 200) {
-                window.location.replace("/yspfront/site/home.html");
+                //window.location.replace("/yspfront/site/home.html");
             }
             else {
                 feedback.style.display = "block";

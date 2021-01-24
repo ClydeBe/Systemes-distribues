@@ -160,7 +160,7 @@ submit1.addEventListener("click", (e) => {
     request.onreadystatechange = function () {
         if (this.readyState === 4) {
             if (this.status == 201) {
-                window.location.replace("/yspfront/site/login.html");
+                window.location.replace("/yspfront/site/account/login.html");
             }
             else {
                 globalFeedback.style.display = "block";

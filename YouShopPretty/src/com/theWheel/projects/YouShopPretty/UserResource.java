@@ -91,8 +91,10 @@ public class UserResource {
 					userRole = "CUSTOMER";
 			}
 			String token = issueToken(userRole, user.getUsername());
+			NewCookie cookie = new NewCookie(COOKIE_NAME, token, "/", "localhost",
+					"Connection au site uniquement", 29*60, false);
 			return Response.ok()
-					.cookie(new NewCookie(COOKIE_NAME, token))
+					.cookie(cookie)
 					.header(AUTHORIZATION_PROPERTY, AUTHENTICATION_NAME + token)
 					.build();
 		}
