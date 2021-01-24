@@ -12,6 +12,8 @@ const usernameColorFeedback = document.getElementById("usernameColorFeedback");
 const emailColorFeedback = document.getElementById("emailColorFeedback");
 const Password1ColorFeedback = document.getElementById("password1ColorFeedback");
 const Password2ColorFeedback = document.getElementById("password2ColorFeedback");
+document.getElementById("globalFeedback");
+const spinner = document.getElementById("spinner");
 
 submit1.disabled = true;
 
@@ -147,7 +149,7 @@ newPassword2Field.addEventListener("input", (e)=>{
 //Sending the POST request
 submit1.addEventListener("click", (e) => {
     e.preventDefault();
-    $(.spinner).style.display = "block";
+    spinner.style.display = "block";
     let user = {
         username: usernameField.value,
         email: emailField.value,
@@ -156,26 +158,13 @@ submit1.addEventListener("click", (e) => {
     const url = `${apiDomain}/account`;
     let request = new XMLHttpRequest();
     request.onreadystatechange = function () {
-        if (this.status == 201) {
-            //Si l'inscription est validé, on connecte l'utilisateur et recupère son token
-            const { username, password } = user;
-            const logUser = {
-                username: username,
-                password: password
+        if (this.readyState === 4) {
+            if (this.status == 201) {
+                window.location.replace("/yspfront/site/login.html");
             }
-            const logUrl = `${apiDomain}/account/signin`;
-            var logRequest = new XMLHttpRequest();
-            logRequest.onreadystatechange = function () {
-                if (this.status == 200) {
-                    console.log("User is logged")
-                    //window.location.replace("/yspfront/site/home.html");
-                }
-                else
-                    console.log("Error on log in")
+            else {
+                globalFeedback.style.display = "block";
             }
-            logRequest.open('POST', logUrl);
-            logRequest.setRequestHeader("Content-Type", "application/json");
-            logRequest.send(JSON.stringify(logUser));
         }
     }
     request.open('POST', url);

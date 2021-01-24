@@ -34,7 +34,7 @@ public class UserResource {
 
 	private static final String AUTHORIZATION_PROPERTY = "Authorization";
 	private static final String AUTHENTICATION_NAME = "Bearer ";
-	private static final String COOKIE_NAME = "JWTsessionId";
+	private static final String COOKIE_NAME = "YSPsessionId";
 	
 	UserRepository userRepository = new UserRepository();
 

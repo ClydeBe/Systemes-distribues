@@ -13,40 +13,45 @@ submit.addEventListener("click", (e) => {
         username: username,
         password: password
     }
-    // console.log(logUser)
-    // const logUrl = `${apiDomain}/account/signin`;
-    // var logRequest = new XMLHttpRequest();
-    // logRequest.onreadystatechange = function () {
-    //     if (this.status === 200) {
-    //         window.location.replace("/home.html");
-    //     }
-    //     else {
-    //         const feedback = document.getElementById("feedback");
-    //         feedback.style.display = "block";
-    //     }
-    // }
-    // logRequest.open('POST', logUrl);
-    // logRequest.send(JSON.stringify(logUser));
-    
+
     let token = "Basic " + btoa(`${username}:${password}`);
 
-    var post = $.ajax({
-            url: `${apiDomain}/account/signin`,
-            type: 'post',
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(logUser),
-        success: function (data, textStatus, response) {
-            let bearerToken = this.getResponseHeader('Authorization');
-            console.log(bearerToken)
-            let toStore = bearerToken.replace("Bearer ", "");
-            document.cookie = `JWT=Bearer ${toStore}`;
-            window.location.replace("/yspfront/site/home.html");
-            },
-            error : function(){
+    const logUrl = `${apiDomain}/account/signin`;
+    var logRequest = new XMLHttpRequest();
+    logRequest.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            if (this.status == 200) {
+                window.location.replace("/yspfront/site/home.html");
+            }
+            else {
                 feedback.style.display = "block";
             }
-        });
+        }
+    }
+    logRequest.open('POST', logUrl);
+    logRequest.setRequestHeader("Authorization", token);
+    logRequest.setRequestHeader("Content-Type", "application/json");
+    logRequest.send(JSON.stringify(logUser));
+    
+
+
+    // var post = $.ajax({
+    //         url: `${apiDomain}/account/signin`,
+    //         type: 'post',
+    //         contentType: "application/json",
+    //         dataType: 'json',
+    //         data: JSON.stringify(logUser),
+    //     success: function (data, textStatus, response) {
+    //         let bearerToken = this.getResponseHeader('Authorization');
+    //         console.log(bearerToken)
+    //         let toStore = bearerToken.replace("Bearer ", "");
+    //         document.cookie = `JWT=Bearer ${toStore}`;
+    //         window.location.replace("/yspfront/site/home.html");
+    //         },
+    //         error : function(){
+    //             feedback.style.display = "block";
+    //         }
+    //     });
         
     
 });

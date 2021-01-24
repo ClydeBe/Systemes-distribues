@@ -32,6 +32,13 @@
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
                         <form method="POST" class="register-form" id="register-form">
+                            <div class="invalid-feedbak" id="globalFeedback" style="display:none">
+                                <small>
+                                    <center>
+                                        <p style='color:red'>Une erreur est survenue. Veuillez essayer à nouveau</p>
+                                    </center>
+                                </small>
+                            </div>
                             <div class="form-group">
                                 <label for="name"><i class="fas fa-user" id="usernameColorFeedback"></i></label>
                                 <input type="text" name="name" id="id_username" placeholder="Your Name"/>
