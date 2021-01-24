@@ -76,3 +76,17 @@ button:focus{
 .items-details{
     margin-top: 50px;
 }
+
+.descirpt .badge{
+    padding: 6px;
+    font-size: 12px;
+    margin-right: 6px;
+}
+
+/* .description span{
+    margin-right: 10px;
+} */
+
+#description_badge{
+  /* margin-right: 10px; */
+}

@@ -3,8 +3,8 @@ $(document).ready(function(){
 })
 
 function navBarRender(){
-  var route = "yspfront/site"; 
-  var shop = "shop";
+  var route   = "yspfront/site"; 
+  var shop    = "shop";
   var account = "account";
 
     $("#navigation").append(`
@@ -53,16 +53,11 @@ function navBarRender(){
           </div>
         </div>
 
-            <!-- <a href="#"><i class="fas fa-user fa-2x"></i>  Sign in</a>
-            <a href="#"><i class="fas fa-shopping-cart fa-2x"><span class="badge rounded-pill bg-danger"> 0</span></i></a>  
-            <a href="#"><i class="far fa-heart fa-2x"></i> <span class="badge rounded-pill bg-warning"> 0</span></a> -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 connexion">
-          <li class="nav-item">
-            <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
-          </li>
+          <!-- <a href="#"><i class="fas fa-user fa-2x"></i>  Sign in</a>
+          <a href="#"><i class="fas fa-shopping-cart fa-2x"><span class="badge rounded-pill bg-danger"> 0</span></i></a>  
+          <a href="#"><i class="far fa-heart fa-2x"></i> <span class="badge rounded-pill bg-warning"> 0</span></a> -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 connexion">
+          <span id="user-activity"></span>
         </ul>
       </div>
     </div>
@@ -70,4 +65,29 @@ function navBarRender(){
     
     
     `);
+
+  var allCookie = document.cookie.split(";");
+
+  if(!allCookie.includes("YSPsessionId")){
+
+    $("#user-activity").append(`     
+      <li class="nav-item">
+        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
+      </li>
+    `);
+  }
+  else{
+    $("#user-activity").append(`     
+      <li class="nav-item">
+        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
+      </li>
+  `);
+  }
+
 }
