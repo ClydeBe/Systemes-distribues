@@ -8,7 +8,7 @@ $(document).ready(function(){
         url: `${domain}/${products}`,
         type: 'get',
         success: function(response){
-            for(i=0; i < response.length && i<=17; i++){
+            for(i=0; i < response.length && i<=23; i++){
                 let {id,price, name,imageLink} = response[i];
                 $('#article-list .container .row').append(`
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" id="product">
