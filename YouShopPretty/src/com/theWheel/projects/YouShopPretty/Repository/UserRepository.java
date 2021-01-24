@@ -87,7 +87,7 @@ public class UserRepository {
 		return new User();
 	}
 
-	//insert a User in the database
+	//Create a new User 
 	public void createUser(User user) {
 		EntityTransaction et = null;
 		errors.clear();
@@ -100,6 +100,7 @@ public class UserRepository {
 			String password = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(password);
 			em.persist(user);
+			et.commit();
 		}
 		catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : Cet User éxiste déjà");
@@ -113,29 +114,23 @@ public class UserRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 
 	//update a User
 	public void update(User u) {
 		EntityTransaction et = null;
 		errors.clear();
-
 		try {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(u);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'user n'existe pas ou a été retiré");
 			et.rollback();
 		}catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 
@@ -150,6 +145,7 @@ public class UserRepository {
 				u = em.merge(u);
 			}
 			em.remove(u);
+			et.commit();
 		}catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
 			et.rollback();
@@ -157,9 +153,6 @@ public class UserRepository {
 		catch(Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 

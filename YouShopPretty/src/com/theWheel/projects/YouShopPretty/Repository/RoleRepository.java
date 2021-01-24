@@ -31,6 +31,7 @@ public class RoleRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.persist(role);
+			et.commit();
 		} catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : Ce Role éxiste déjà");
 			et.rollback();
@@ -43,9 +44,6 @@ public class RoleRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 
 	public void updateRole(Role role) {
@@ -54,6 +52,7 @@ public class RoleRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(role);
+			et.commit();
 		}catch(IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas un role ou a été rétiré");
 			et.rollback();
@@ -61,9 +60,6 @@ public class RoleRepository {
 		catch(Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 	
@@ -73,6 +69,7 @@ public class RoleRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.remove(role);
+			et.commit();
 		}catch(IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas un role ou a été rétiré");
 			et.rollback();
@@ -80,9 +77,6 @@ public class RoleRepository {
 		catch(Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 

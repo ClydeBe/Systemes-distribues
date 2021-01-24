@@ -34,6 +34,7 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 			et = em.getTransaction();
 			et.begin();
 			em.persist(rolePermission);
+			et.commit();
 		} catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : Cet Permission éxiste déjà");
 			et.rollback();
@@ -46,9 +47,6 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 	
 	public void updateRolePermission(RolePermission rolePermission) {
@@ -58,6 +56,7 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 			et = em.getTransaction();
 			et.begin();
 			em.merge(rolePermission);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une rolePermission");
 			et.rollback();
@@ -65,9 +64,6 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 	
@@ -78,6 +74,7 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 			et = em.getTransaction();
 			et.begin();
 			em.merge(rolePermission);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une rolePermission");
 			et.rollback();
@@ -85,9 +82,6 @@ EntityManager em = EntityManagerProvider.getEntityManager();
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 

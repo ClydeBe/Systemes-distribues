@@ -34,6 +34,7 @@ public class UserPermissionRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.persist(userPermission);
+			et.commit();
 		} catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : Cet Permission éxiste déjà");
 			et.rollback();
@@ -46,9 +47,6 @@ public class UserPermissionRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 	
 	public void updateUserPermission(UserPermission userPermission) {
@@ -58,6 +56,7 @@ public class UserPermissionRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(userPermission);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une UserPermission");
 			et.rollback();
@@ -65,9 +64,6 @@ public class UserPermissionRepository {
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 	
@@ -78,6 +74,7 @@ public class UserPermissionRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.merge(userPermission);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une UserPermission");
 			et.rollback();
@@ -85,9 +82,6 @@ public class UserPermissionRepository {
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 	

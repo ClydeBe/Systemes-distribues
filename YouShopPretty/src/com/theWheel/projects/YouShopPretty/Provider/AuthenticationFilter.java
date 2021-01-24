@@ -15,7 +15,6 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
@@ -42,7 +41,7 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
 	private static final String AUTHORIZATION_PROPERTY = "Authorization";
 	private static final String AUTHENTICATION_SCHEME = "Basic";
 	private static final String AUTHENTICATION_NAME = "Bearer";
-	private static final String COOKIE_NAME = "JWTsessionId";
+	private static final String COOKIE_NAME = "YSPsessionId";
 
 	@Override
 	public void filter(ContainerRequestContext requestContext)

@@ -30,11 +30,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
-public class UserRessource {
+public class UserResource {
 
 	private static final String AUTHORIZATION_PROPERTY = "Authorization";
 	private static final String AUTHENTICATION_NAME = "Bearer ";
-	private static final String COOKIE_NAME = "JWTsessionId";
+	private static final String COOKIE_NAME = "YSPsessionId";
 	
 	UserRepository userRepository = new UserRepository();
 
@@ -93,7 +93,8 @@ public class UserRessource {
 			String token = issueToken(userRole, user.getUsername());
 			return Response.ok()
 					.cookie(new NewCookie(COOKIE_NAME, token))
-					.header(AUTHORIZATION_PROPERTY, AUTHENTICATION_NAME + token).build();
+					.header(AUTHORIZATION_PROPERTY, AUTHENTICATION_NAME + token)
+					.build();
 		}
 		return Response.status(Status.UNAUTHORIZED).build();
 	}
@@ -162,6 +163,11 @@ public class UserRessource {
                 .signWith(SignatureAlgorithm.HS512,secretKey.getBytes() )
                 .compact();
         return jwtToken;
+    }
+    
+    private boolean sendWelcomeEmail() {
+    	
+    	return false;
     }
 
 }
