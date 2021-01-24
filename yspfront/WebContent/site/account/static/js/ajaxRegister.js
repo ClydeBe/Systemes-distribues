@@ -147,6 +147,7 @@ newPassword2Field.addEventListener("input", (e)=>{
 //Sending the POST request
 submit1.addEventListener("click", (e) => {
     e.preventDefault();
+    $(.spinner).style.display = "block";
     let user = {
         username: usernameField.value,
         email: emailField.value,
@@ -166,8 +167,11 @@ submit1.addEventListener("click", (e) => {
             var logRequest = new XMLHttpRequest();
             logRequest.onreadystatechange = function () {
                 if (this.status == 200) {
-                    window.location.replace("/home.html");
+                    console.log("User is logged")
+                    //window.location.replace("/yspfront/site/home.html");
                 }
+                else
+                    console.log("Error on log in")
             }
             logRequest.open('POST', logUrl);
             logRequest.setRequestHeader("Content-Type", "application/json");

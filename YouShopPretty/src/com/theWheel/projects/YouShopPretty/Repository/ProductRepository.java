@@ -84,6 +84,7 @@ public class ProductRepository {
 		try {
 			et.begin();
 			em.persist(p);
+			et.commit();
 		}
 		catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Ce produit existe déjà");
@@ -97,9 +98,6 @@ public class ProductRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 	
 	public void update(Product p) {
@@ -108,13 +106,11 @@ public class ProductRepository {
 		try {
 			et.begin();
 			em.merge(p);
+			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "Le produit n'existe pas ou a été retiré");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 		
 	}
@@ -128,6 +124,7 @@ public class ProductRepository {
 				p = em.merge(p);
 			}
 			em.remove(p);
+			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "Le produit n'existe pas ou a été retiré");
@@ -136,9 +133,6 @@ public class ProductRepository {
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 }

@@ -34,7 +34,6 @@ submit.addEventListener("click", (e) => {
             url: `${apiDomain}/account/signin`,
             type: 'post',
             contentType: "application/json",
-            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token);},
             dataType: 'json',
             data: JSON.stringify(logUser),
         success: function (data, textStatus, response) {
@@ -42,7 +41,7 @@ submit.addEventListener("click", (e) => {
             console.log(bearerToken)
             let toStore = bearerToken.replace("Bearer ", "");
             document.cookie = `JWT=Bearer ${toStore}`;
-            window.location.replace("/home.html");
+            window.location.replace("/yspfront/site/home.html");
             },
             error : function(){
                 feedback.style.display = "block";
