@@ -1,6 +1,7 @@
-const domain = "http://localhost:86/YouShopPretty/webapi/";
+const domain   = "http://localhost:86/YouShopPretty/webapi/";
 const products = "products";
-
+const route    = "yspfront/site"; 
+const shop     = "shop";
 $(document).ready(function(){
 
     let idProduct = 1;
@@ -20,7 +21,7 @@ $(document).ready(function(){
                         <img src=${imageLink} class="img-fluid" alt="item">
                     </div>
                     <div class="middle">
-                        <a href="/shop/view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
+                        <a href="/${route}/${shop}/view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
                         <a href="#" class="btn btn-prinmary"><i class="far fa-heart"></i></a>
                         <a href="#" class="btn btn-prinmary"><i class="fas fa-cart-plus"></i></a>
                     </div>

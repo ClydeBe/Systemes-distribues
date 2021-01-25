@@ -1,5 +1,6 @@
 // const domain = "http://localhost:80/YouShopPretty/webapi/";
 // const whishlist = "whishlist";
+// /${route}/${shop}/view-article.html?id=${id}
 
 function addOnWishList(id,name){
     alert(`${id} : ${name}`);

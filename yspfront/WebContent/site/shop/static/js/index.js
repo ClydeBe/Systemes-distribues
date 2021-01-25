@@ -1,5 +1,7 @@
-const domain = "http://localhost:86/YouShopPretty/";
+const domain   = "http://localhost:86/YouShopPretty/";
 const products = "products";
+const route    = "yspfront/site"; 
+const shop     = "shop";
 
 $(document).ready(function(){
 
@@ -16,7 +18,7 @@ $(document).ready(function(){
                         <img src=${imageLink} class="img-fluid zoom" alt="item">
                     </div>
                     <div class="middle" id=${id}>
-                        <a id="link-to-viewArticle" href="view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
+                        <a id="link-to-viewArticle" href="/${route}/${shop}/view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
                         <a type="button" class="btn btn-prinmary" onclick="addOnWishList(${id},'${name}')"><i class="far fa-heart"></i></a>
                         <a href="#" class="btn btn-prinmary"><i class="fas fa-cart-plus"></i></a>
                     </div>

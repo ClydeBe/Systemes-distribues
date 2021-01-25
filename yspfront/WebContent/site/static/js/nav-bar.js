@@ -31,15 +31,15 @@ function navBarRender(){
 
         <div class="row">
           <div class="col-lg-12">
-            <form class="d-flex search input-group me-2">
-              <select class="form-select category-drop" aria-label="Default select example">
+            <form class="d-flex search input-group me-2" method="GET" action="/${route}/${shop}/search_result.html">
+              <select class="form-select category-drop" name="category" aria-label="Default select example">
                  <option selected>--All Categories</option>
                  <option value="1">One</option>
                  <option value="2">Two</option>
                  <option value="3">Three</option>
               </select>
-            <input class="form-control" id="search" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+            <button id="submit-form" class="btn btn-outline-success" type="submit">Search</button>
           </form>
           </div>
           <div class="col-lg-12">
@@ -69,6 +69,7 @@ function navBarRender(){
           <!-- <a href="#"><i class="fas fa-user fa-2x"></i>  Sign in</a>
           <a href="#"><i class="fas fa-shopping-cart fa-2x"><span class="badge rounded-pill bg-danger"> 0</span></i></a>  
           <a href="#"><i class="far fa-heart fa-2x"></i> <span class="badge rounded-pill bg-warning"> 0</span></a> -->
+          
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 connexion">
           <span id="user-activity"></span>
         </ul>
@@ -79,7 +80,7 @@ function navBarRender(){
     
     `);
 
-  console.log(document.cookie.includes('YSPsessionId'));
+ // console.log(document.cookie.includes('YSPsessionId'));
 
   if(document.cookie.includes('YSPsessionId')){
       

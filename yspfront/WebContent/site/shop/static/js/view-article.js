@@ -2,9 +2,9 @@
 
 $(document).ready(function(){
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const domain = "http://localhost:86/YouShopPretty/webapi/";
+    const params   = new URLSearchParams(window.location.search);
+    const id       = params.get("id");
+    const domain   = "http://localhost:86/YouShopPretty/webapi/";
     const products = `products/${id}`;
 
     $.ajax({
