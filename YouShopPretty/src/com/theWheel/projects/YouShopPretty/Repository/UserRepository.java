@@ -115,6 +115,26 @@ public class UserRepository {
 			et.rollback();
 		}
 	}
+	
+	public boolean setPassword(String email, String password) {
+		errors.clear();
+		TypedQuery<User> query =  em.createQuery("SELECT u FROM User u WHERE u.email =: email" , User.class);
+		query.setParameter("email", email);
+		try{
+			User u = query.getSingleResult();
+			ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+			passwordEncryptor.setAlgorithm("SHA-256");
+			passwordEncryptor.setPlainDigest( false );
+			String newPassword = passwordEncryptor.encryptPassword(password);
+			u.setPassword(newPassword);
+			update(u);
+			if (errors.isEmpty())
+				return true;
+		}
+		catch (Exception e) {
+		}
+		return false;
+	}
 
 	//update a User
 	public void update(User u) {
