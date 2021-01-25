@@ -232,3 +232,7 @@ footer{
     border-radius: 3px
     /* border-bottom: solid 5px #2a3c52; */
 }
+
+#user-activity .nav-item{
+    display: inline-block;
+}

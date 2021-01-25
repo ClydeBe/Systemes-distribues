@@ -1,4 +1,4 @@
-const apiDomain = "http://localhost:80/YouShopPretty/webapi";
+const apiDomain = "http://localhost:86/YouShopPretty/webapi";
 const usernameField = document.getElementById("id_username");
 const usernameFeedback = document.getElementById("usernameFeedback");
 const submit1 = document.getElementById("submit");

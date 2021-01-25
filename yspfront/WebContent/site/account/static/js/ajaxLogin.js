@@ -1,4 +1,4 @@
-const apiDomain = "http://localhost:80/YouShopPretty/webapi";
+const apiDomain = "http://localhost:86/YouShopPretty/webapi";
 
 const submit = document.getElementById("signin");
 const usernameField = document.getElementById("username");
@@ -21,7 +21,7 @@ submit.addEventListener("click", (e) => {
     logRequest.onreadystatechange = function () {
         if (this.readyState === 4) {
             if (this.status == 200) {
-                //window.location.replace("/yspfront/site/home.html");
+                window.location.replace("/yspfront/site/shop/index.html");
             }
             else {
                 feedback.style.display = "block";

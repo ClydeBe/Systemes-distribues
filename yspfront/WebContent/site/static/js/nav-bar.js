@@ -1,6 +1,19 @@
 $(document).ready(function(){
     navBarRender();
+    recupererCookie("JWTsessionId");
 })
+
+
+function recupererCookie(nom) {
+  nom = nom + "=";
+  var liste = document.cookie.split(';');
+  for (var i = 0; i < liste.length; i++) {
+      var c = liste[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nom) == 0) return c.substring(nom.length, c.length);
+  }
+  return null;
+}
 
 function navBarRender(){
   var route   = "yspfront/site"; 
@@ -66,28 +79,33 @@ function navBarRender(){
     
     `);
 
-  var allCookie = document.cookie.split(";");
+  console.log(document.cookie.includes('YSPsessionId'));
 
-  if(!allCookie.includes("YSPsessionId")){
-
-    $("#user-activity").append(`     
-      <li class="nav-item">
-        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
+  if(document.cookie.includes('YSPsessionId')){
+      
+      $("#user-activity").html(`     
+      <li class="nav-item d-inline-block">
+        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-shopping-cart"></i>  Cart </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
+      <li class="nav-item d-inline-block">
+        <a class="nav-link" href=/${route}/${account}/register.html><i class="far fa-heart"></i> WishList</a>
       </li>
-    `);
-  }
-  else{
-    $("#user-activity").append(`     
-      <li class="nav-item">
-        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
+      <li class="nav-item d-inline-block">
+        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-users"></i></a>
       </li>
   `);
+
+  }
+  else{
+    $("#user-activity").html(`     
+    <li class="nav-item d-inline-block">
+      <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-sign-in-alt fa-2x"></i>  Sign in </a>
+    </li>
+    <li class="nav-item d-inline-block">
+      <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-door-open fa-2x"></i> Resgister</a>
+    </li>
+  `);
+
   }
 
 }
