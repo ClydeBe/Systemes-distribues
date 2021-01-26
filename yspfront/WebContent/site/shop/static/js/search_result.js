@@ -42,6 +42,7 @@ $(document).ready(function(){
                         </ul>
                     </div>`);
                 }
+                if(response.length <= 6) $('footer').css('margin-top','80px');
             }
 
             else{
