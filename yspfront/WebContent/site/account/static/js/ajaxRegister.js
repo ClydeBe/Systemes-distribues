@@ -1,19 +1,19 @@
-const apiDomain = "http://localhost:86/YouShopPretty/webapi";
-const usernameField = document.getElementById("id_username");
-const usernameFeedback = document.getElementById("usernameFeedback");
-const submit1 = document.getElementById("submit");
-const emailField = document.getElementById("id_email");
-const emailFeedback = document.getElementById("emailFeedback");
-const newPassword1Field = document.getElementById("id_password1");
-const newPassword2Field = document.getElementById("id_password2");
-const newPassword1Feedback = document.getElementById("password1Feedback");
-const newPassword2Feedback = document.getElementById("password2Feedback");
-const usernameColorFeedback = document.getElementById("usernameColorFeedback");
-const emailColorFeedback = document.getElementById("emailColorFeedback");
-const Password1ColorFeedback = document.getElementById("password1ColorFeedback");
-const Password2ColorFeedback = document.getElementById("password2ColorFeedback");
-document.getElementById("globalFeedback");
-const spinner = document.getElementById("spinner");
+const apiDomain                 = "http://localhost:80/YouShopPretty/webapi";
+const usernameField             = document.getElementById("id_username");
+const usernameFeedback          = document.getElementById("usernameFeedback");
+const submit1                   = document.getElementById("submit");
+const emailField                = document.getElementById("id_email");
+const emailFeedback             = document.getElementById("emailFeedback");
+const newPassword1Field         = document.getElementById("id_password1");
+const newPassword2Field         = document.getElementById("id_password2");
+const newPassword1Feedback      = document.getElementById("password1Feedback");
+const newPassword2Feedback      = document.getElementById("password2Feedback");
+const usernameColorFeedback     = document.getElementById("usernameColorFeedback");
+const emailColorFeedback        = document.getElementById("emailColorFeedback");
+const Password1ColorFeedback    = document.getElementById("password1ColorFeedback");
+const Password2ColorFeedback    = document.getElementById("password2ColorFeedback");
+const globalFeedback            = document.getElementById("globalFeedback");
+const spinner                   = document.getElementById("spinner");
 
 submit1.disabled = true;
 
@@ -158,7 +158,7 @@ submit1.addEventListener("click", (e) => {
     const url = `${apiDomain}/account`;
     let request = new XMLHttpRequest();
     request.onreadystatechange = function () {
-        if (this.readyState === 4) {
+        if (this.readyState === XMLHttpRequest.DONE ) {
             if (this.status == 201) {
                 window.location.replace("/yspfront/site/account/login.html");
             }

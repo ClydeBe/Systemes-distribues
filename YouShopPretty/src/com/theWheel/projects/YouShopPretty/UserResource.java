@@ -2,6 +2,7 @@ package com.theWheel.projects.YouShopPretty;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -125,7 +126,7 @@ public class UserResource {
 				else
 					userRole = "CUSTOMER";
 			}
-			String token = issueToken(userRole, user.getUsername());
+			String token = issueToken(userRole, user.getUsername(), user.getId());
 			NewCookie cookie = new NewCookie(COOKIE_NAME, token, "/", "localhost",
 					"Connection au site uniquement", 29*60, false);
 			return Response.ok()
@@ -184,17 +185,18 @@ public class UserResource {
 	@PermitAll
 	@POST
 	@Path("resetpassword")
-	public Response resetPasswrd(@QueryParam("resetToken") String resetToken) {
+	public Response resetPasswrd(@QueryParam("resetToken") String resetToken, User u) {
 		//On décode le token et recherche son Id
 		try {
 			Jws<Claims> jwsToken = Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(resetToken);
 			//On recupère l'email depui le token
 			String email = jwsToken.getBody().getId();
-			boolean passwordSet = userRepository.setPassword(email, resetToken);
+			boolean passwordSet = userRepository.setPassword(email, u.getPassword());
 			if(passwordSet)
 				return Response.status(Status.OK).build();
 		} catch (Exception e) {
 			//Impossibilité de décoder le token
+			e.printStackTrace();
 		}
 		return Response.status(Status.UNAUTHORIZED).build();
 	}
@@ -203,7 +205,8 @@ public class UserResource {
 	@PUT
 	public Response updateUser(User u) {
 		userRepository.update(u);
-		if(userRepository.errors.isEmpty())return Response.status(Status.OK).build();
+		if(userRepository.errors.isEmpty())
+			return Response.status(Status.OK).build();
 		return Response.status(Status.EXPECTATION_FAILED).build();	}
 	
 	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
@@ -217,12 +220,15 @@ public class UserResource {
 		return Response.status(Status.EXPECTATION_FAILED).build();
 	}
 	
-    private String issueToken(String userRole, String userName) {
+	
+	
+    private String issueToken(String userRole, String userName, Long userId) {
         
         String jwtToken = Jwts.builder()
         		.setId(userName)
                 .setSubject(userRole)
                 .setIssuer("YouSHopPretty")
+                .claim("UserId", userId)
                 .claim("TMH", "L. JE")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 29*60*1000L))
@@ -258,7 +264,7 @@ public class UserResource {
      	   	message.setContent(content, "text/html");
      	   	Transport.send(message);
 		} catch (Exception e) {
-			System.out.println("Failed");
+			System.out.println("Expectation failed");
 			e.printStackTrace();
 		}
     }
