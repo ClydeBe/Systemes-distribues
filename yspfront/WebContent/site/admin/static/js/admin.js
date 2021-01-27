@@ -1,8 +1,27 @@
 $(document).ready(function () {
 
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
+  const domain   = "http://localhost:80/YouShopPretty/webapi";
+  const products   = "products";
+
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+  });
+
+//   $.ajax({
+//     url: `${domain}/${products}`,
+//     type: 'get',
+//     success: function(response){
+//         for(i=0; i < response.length && i<=23; i++){
+//             let {id,price, name,imageLink} = response[i];
+//             $('#edit_product .container .row').append(`
+//                 Hello
+//             `)
+//         }
+//     },
+//     error: function(){
+//         console.log("error AJAX GET");
+//     }
+// });
 
 });
 

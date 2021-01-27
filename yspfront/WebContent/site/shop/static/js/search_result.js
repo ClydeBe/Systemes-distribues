@@ -5,7 +5,7 @@ $(document).ready(function(){
     const category     = params.get("category");  
     
 
-    const domain   = "http://localhost:86/YouShopPretty/webapi";
+    const domain   = "http://localhost:80/YouShopPretty/webapi";
     const products = `products/search/${query_search}`;
     const route    = "yspfront/site"; 
     const shop     = "shop";

@@ -115,14 +115,12 @@ public class ProductRepository {
 		
 	}
 
-	public void delete(Product p) {
+	public void delete(long id) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
 		try {
 			et.begin();
-			if (!em.contains(p)) {
-				p = em.merge(p);
-			}
+			Product p = getById(id);
 			em.remove(p);
 			et.commit();
 		}

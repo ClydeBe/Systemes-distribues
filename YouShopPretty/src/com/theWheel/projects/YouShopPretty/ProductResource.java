@@ -87,8 +87,8 @@ public class ProductResource {
 	@RolesAllowed({"STAFF", "ADMIN"})
 	@DELETE
 	@Path("{id}")
-	public Response deleteProduct(Product p) {
-		productRepository.delete(p);
+	public Response deleteProduct(@PathParam("id") long id) {
+		productRepository.delete(id);
 		if(productRepository.errors.isEmpty())
 			return Response.status(Status.OK).build();
 		return Response.status(Status.EXPECTATION_FAILED).entity(productRepository.errors).build();

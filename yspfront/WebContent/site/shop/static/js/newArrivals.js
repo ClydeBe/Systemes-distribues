@@ -1,4 +1,4 @@
-const domain   = "http://localhost:86/YouShopPretty/webapi/";
+const domain   = "http://localhost:80/YouShopPretty/webapi";
 const products = "products";
 const route    = "yspfront/site"; 
 const shop     = "shop";

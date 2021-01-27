@@ -1,4 +1,4 @@
-// const domain = "http://localhost:80/YouShopPretty/webapi/";
+// const domain = "http://localhost:80/YouShopPretty/webapi";
 // const whishlist = "whishlist";
 // /${route}/${shop}/view-article.html?id=${id}
 

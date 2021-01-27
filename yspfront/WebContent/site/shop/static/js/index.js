@@ -1,4 +1,4 @@
-const domain   = "http://localhost:86/YouShopPretty/";
+const domain   = "http://localhost:80/YouShopPretty";
 const products = "products";
 const route    = "yspfront/site"; 
 const shop     = "shop";
