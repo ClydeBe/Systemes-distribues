@@ -2,7 +2,6 @@ package com.theWheel.projects.YouShopPretty;
 
 import java.util.Date;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -271,7 +270,16 @@ public class UserResource {
     
     private boolean sendWelcomeEmail(String to) {
     	String subject = "Bienvenu(e) sur YouShopPretty, La boutique en ligne qui vous ressemble";
-    	String message = "<h1>HTML Message</h1>";
+    	String message = "<h3>Bienvenue sur <i>YouShopPretty</i></h3><br><br>"
+    			+ "Vous venez de vous inscrire sur la boutique en ligne de référence, YouShopPretty. Nous"
+    			+ " vous en somme reconnaissant! Vite, profitez de toutes nos offres exclusives!<br><br>"
+    			+ "Faites vous plaisir sur <b><i>YouShopPretty</i></b>! A très bientôt dans votre boutique en ligne"
+    			+ "<br><br>-------<br><br>"
+    			+ "<img src='https://zupimages.net/up/21/04/zinb.png' width='420' height = '247'><br>"
+    			+ "<b><i>YouShopPretty</i></b>, facilitez vous la vie! Nous vous offrons un catalogue de produits"
+    			+ " unique à des prix uniques!  Faites un tour sur notre boutique et vous ne serez pas déçu.<br>"
+    			+ "Ce message vous a été envoyé automatiquement. Bien vouloir ne pas y répondre.<br>"
+    			+ "L'équipe <b><i>YouShopPretty</i></b>!";
     	sendEmail(to, subject, message);
     	return false;
     }
@@ -298,7 +306,13 @@ public class UserResource {
     			+ " lien de reinitialisation.<br>" + baseUrl + "<br><br>Si vous n'êtes pas à"
     			+ " l'origine de ce mailn bien vouloir sécuriser votre compte en changeant"
     			+ " de mot de passe.<br>Nous sommes impatient de vous revoir dans votre "
-    			+ " boutique préférée.<br><br> L'équipe YouShopPretty";
+    			+ " boutique préférée.<br><br> L'équipe YouShopPretty"
+    			+ "<br><br>-------<br><br>"
+    			+ "<img src='https://zupimages.net/up/21/04/zinb.png' width='420' height = '247'><br>"
+    			+ "<b><i>YouShopPretty</i></b>, facilitez vous la vie! Nous vous offrons un catalogue de produits"
+    			+ " unique à des prix uniques!  Faites un tour sur notre boutique et vous ne serez pas déçu.<br>"
+    			+ "Ce message vous a été envoyé automatiquement. Bien vouloir ne pas y répondre.<br>"
+    			+ "L'équipe <b><i>YouShopPretty</i></b>!";
     	sendEmail(u.getEmail(), subject, message);
     }
     
