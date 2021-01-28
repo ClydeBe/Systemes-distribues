@@ -53,9 +53,11 @@ public class WhishListRepository {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
+			Whishlist wish = getWhishList(whishlist.getId());
+			wish.setProducts(whishlist.getProducts());
 			et = em.getTransaction();
 			et.begin();
-			em.merge(whishlist);
+			em.merge(wish);
 			et.commit();
 		}
 		catch (IllegalArgumentException e) {
@@ -98,9 +100,16 @@ public class WhishListRepository {
 	
 	// Get a WhisList by the user id
 	public Whishlist getWhishListByUserId(long idUser) {
-		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM Whishlist w WHERE w.user_id =: idUser",Whishlist.class);
-		query.setParameter("1", idUser);
-		return query.getSingleResult();
+		errors.clear();
+		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM Whishlist w WHERE w.userId =: idUser",Whishlist.class);
+		query.setParameter("idUser", idUser);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			errors.put("Error", "No result for query");
+		}
+		return null;
 	}
 
 //	//Get all Products

@@ -42,6 +42,18 @@ public class WhishListResource {
 		if(whishList == null) return Response.noContent().build();
 		return Response.ok(whishList).build();
 	}
+	
+	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
+	@GET
+	@Path("userid/{id}")
+	public Response getwhishListByUserId(@PathParam("id") long id) {
+		Whishlist whishList = whishListRepository.getWhishListByUserId(id);
+		
+		if(whishList == null) {
+			return Response.noContent().build();
+		}
+		return Response.ok(whishList).build();
+	}
 
 	@RolesAllowed({"CUSTOMER", "STAFF", "ADMIN"})
 	@POST

@@ -18,7 +18,7 @@ $(document).ready(function(){
                     <img src=${images} class="img-fluid" alt="item">
                     <div class="middle">
                         <a href="view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-prinmary"><i class="far fa-heart"></i></a>
+                        <a onclick="addToWishList(${id})" class="btn btn-prinmary"><i class="far fa-heart"></i></a>
                         <a href="#" class="btn btn-prinmary"><i class="fas fa-cart-plus"></i></a>
                     </div>
                 </div>
@@ -41,4 +41,34 @@ $(document).ready(function(){
         }
     });
 
+
 });
+
+
+function addToWishList(id){
+
+    if(document.cookie.includes('YSPsessionId')){
+        let cookie = getCookie('YSPsessionId');
+        //document.cookie.filter(e => e.includes("YSPsessionId"));
+        console.log(cookie); 
+        console.log(cookie);      
+    }
+    else{
+        alert("vous devez vous connecter pour ajouter cet article");
+
+    }
+
+}
+
+function getCookie(name) {
+    var cookieArr = document.cookie.split(";");
+    
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+            //window.atob(enc);
+        }
+    }
+    return null;
+}
