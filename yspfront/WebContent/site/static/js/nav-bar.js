@@ -23,7 +23,7 @@ function navBarRender(){
     $("#navigation").append(`
     <nav class="navbar navbar-expand-lg navbar-dark bg-perso">
     <div class="container">
-        <a class="navbar-brand" href=/${route}/${shop}/index.html><i class="fab fa-shopware fa-3x"></i> <span class="logo"> ZMall</span></a>
+        <a class="navbar-brand" href=/${route}/${shop}/index.html><img src='/yspfront/site/static/assets/logo.png'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,10 +33,10 @@ function navBarRender(){
           <div class="col-lg-12">
             <form class="d-flex search input-group me-2" method="GET" action="/${route}/${shop}/search_result.html">
               <select class="form-select category-drop" name="category" aria-label="Default select example">
-                 <option selected>--All Categories</option>
-                 <option value="1">One</option>
-                 <option value="2">Two</option>
-                 <option value="3">Three</option>
+                <option selected>--All Categories</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
               </select>
             <input class="form-control" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
             <button id="submit-form" class="btn btn-outline-success" type="submit">Search</button>

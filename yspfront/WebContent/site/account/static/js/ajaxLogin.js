@@ -4,9 +4,11 @@ const submit = document.getElementById("signin");
 const usernameField = document.getElementById("username");
 const passwordField = document.getElementById("password");
 const feedback = document.getElementById("feedback");
+const spinner = document.getElementById("spinner");
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
+    spinner.style.display = "block";
     const username = usernameField.value;
     const password = passwordField.value;
     const logUser = {
