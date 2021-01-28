@@ -63,7 +63,7 @@ submit.addEventListener('click', (e) => {
         if (this.readyState == XMLHttpRequest.DONE) {
             if (this.status == 200) {
                 globalFeedback.style.display = "block"
-                textFeedback.innerHTML = "Votre mot de passe a bien été modifié"
+                location.href("")
             }
             else {
                 globalFeedback.style.display = "block"
