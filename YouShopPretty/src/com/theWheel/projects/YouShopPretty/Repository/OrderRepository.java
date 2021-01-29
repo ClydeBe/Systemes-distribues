@@ -80,9 +80,11 @@ public class OrderRepository {
 	public boolean update(Order o) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
+		Order order = getById(o.getId());
+		order.setProcessed(o.isProcessed()); 
 		try {
 			et.begin();
-			em.merge(o);
+			em.merge(order);
 			et.commit();
 			return true;
 		}
@@ -93,9 +95,10 @@ public class OrderRepository {
 		return false;
 	}
 
-	public boolean delete(Order o) {
+	public boolean delete(long id) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
+		Order o = getById(id);
 		try {
 			et.begin();
 			if (!em.contains(o)) {

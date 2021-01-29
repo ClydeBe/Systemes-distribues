@@ -19,12 +19,16 @@ public class Order {
 	@Column(name = "user_id")
 	private Long userId;
 	
-	@Column(name = "products")
-	private String products;
-	
 	@Column(name = "is_processed")
 	private boolean isProcessed;
 
+	
+	@Column(name = "products")
+	private String products;
+	
+//	@Column(name = "order_price")
+//	private Long orderPrice;
+	
 	public Order() {
 		super();
 	}
@@ -52,6 +56,14 @@ public class Order {
 	public void setProducts(String products) {
 		this.products = products;
 	}
+	
+//	public Long getOrderPrice() {
+//		return orderPrice;
+//	}
+//
+//	public void setOrderPrice(Long orderPrice) {
+//		this.orderPrice = orderPrice;
+//	}
 
 	public boolean isProcessed() {
 		return isProcessed;
