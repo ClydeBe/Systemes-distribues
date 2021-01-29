@@ -18,16 +18,16 @@ public class Product implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product")
-	public Long Id;
+	private Long Id;
 
-	public Double price;
-	public Long quantity;
-	public String description;
-	public String name;
-	public String tags;
-	public String caracteristics;
-	public String category;
-	public String images;
+	private Double price;
+	private Long quantity;
+	private String description;
+	private String name;
+	private String tags;
+	private String caracteristics;
+	private String category;
+	private String images;
 	
 
 	public Product() {

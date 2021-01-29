@@ -17,13 +17,13 @@ public class RolePermission implements Serializable {
 	@Id
 	@GeneratedValue()
 	@Column(name = "id_user_permission")
-	Long Id;
+	private Long Id;
 	
 	@Column(name = "role_id")
-	Long roleId;
+	private Long roleId;
 	
 	@Column(name = "permission_id")
-	Long permissionId;
+	private Long permissionId;
 
 	public RolePermission() {
 		super();

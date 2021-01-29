@@ -1,4 +1,4 @@
-package com.theWheel.projects.YouShopPretty;
+package com.theWheel.projects.YouShopPretty.Provider;
 
 import java.io.IOException;
 

@@ -41,6 +41,7 @@ public class BillRepository {
 		try {
 			et.begin();
 			em.persist(b);
+			et.commit();
 		}
 		catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : cette facture existe déjà");
@@ -54,9 +55,6 @@ public class BillRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 	
 	public void update(Bill b) {
@@ -65,15 +63,12 @@ public class BillRepository {
 		try {
 			et.begin();
 			em.merge(b);
+			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "La facture n'existe pas ou a été retiré");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
-		
 	}
 
 	public void delete(Bill b) {
@@ -85,6 +80,7 @@ public class BillRepository {
 				b = em.merge(b);
 			}
 			em.remove(b);
+			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "La facture n'existe pas ou a été retiré");
@@ -93,9 +89,6 @@ public class BillRepository {
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 }

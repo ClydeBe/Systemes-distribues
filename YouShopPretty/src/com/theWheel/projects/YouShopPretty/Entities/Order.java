@@ -13,18 +13,22 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_")
-	public Long Id;
+	@Column(name = "id_order")
+	private Long Id;
 	
 	@Column(name = "user_id")
-	public Long userId;
-	
-	@Column(name = "products")
-	public String products;
+	private Long userId;
 	
 	@Column(name = "is_processed")
-	public boolean isProcessed;
+	private boolean isProcessed;
 
+	
+	@Column(name = "products")
+	private String products;
+	
+//	@Column(name = "order_price")
+//	private Long orderPrice;
+	
 	public Order() {
 		super();
 	}
@@ -52,6 +56,14 @@ public class Order {
 	public void setProducts(String products) {
 		this.products = products;
 	}
+	
+//	public Long getOrderPrice() {
+//		return orderPrice;
+//	}
+//
+//	public void setOrderPrice(Long orderPrice) {
+//		this.orderPrice = orderPrice;
+//	}
 
 	public boolean isProcessed() {
 		return isProcessed;

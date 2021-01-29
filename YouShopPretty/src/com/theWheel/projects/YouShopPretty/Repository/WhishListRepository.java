@@ -32,6 +32,7 @@ public class WhishListRepository {
 			et = em.getTransaction();
 			et.begin();
 			em.persist(whishlist);
+			et.commit();
 		}
 		catch (EntityExistsException e) {
 			errors.put("Entity_Exist", "Collision : Cette whishlist éxiste déjà");
@@ -45,9 +46,6 @@ public class WhishListRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
 	}
 	
 	// Update a WhisList
@@ -55,9 +53,12 @@ public class WhishListRepository {
 		EntityTransaction et = null;
 		errors.clear();
 		try {
+			Whishlist wish = getWhishList(whishlist.getId());
+			wish.setProducts(whishlist.getProducts());
 			et = em.getTransaction();
 			et.begin();
-			em.merge(whishlist);
+			em.merge(wish);
+			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "L'objet ajouté n'est pas une whishlist ou n'exite pas");
@@ -67,10 +68,6 @@ public class WhishListRepository {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
 		}
-		finally {
-			et.commit();
-		}
-
 	}
 	
 	public void deleteWhisList(Whishlist whishlist) {
@@ -78,7 +75,9 @@ public class WhishListRepository {
 		try {
 			et = em.getTransaction();
 			et.begin();
-			if(em.contains(whishlist))em.remove(whishlist);
+			if(em.contains(whishlist))
+				em.remove(whishlist);
+			et.commit();
 		} catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity","L'utilisateur entré n'existe pas ou a été retiré");
 			et.rollback();
@@ -86,9 +85,6 @@ public class WhishListRepository {
 		catch (Exception e) {
 			errors.put("Error", "Une erreur est survenue");
 			et.rollback();
-		}
-		finally {
-			et.commit();
 		}
 	}
 	
@@ -104,9 +100,16 @@ public class WhishListRepository {
 	
 	// Get a WhisList by the user id
 	public Whishlist getWhishListByUserId(long idUser) {
-		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM Whishlist w WHERE w.user_id =: idUser",Whishlist.class);
-		query.setParameter("1", idUser);
-		return query.getSingleResult();
+		errors.clear();
+		TypedQuery<Whishlist> query = em.createQuery("SELECT w FROM Whishlist w WHERE w.userId =: idUser",Whishlist.class);
+		query.setParameter("idUser", idUser);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			errors.put("Error", "No result for query");
+		}
+		return null;
 	}
 
 //	//Get all Products
