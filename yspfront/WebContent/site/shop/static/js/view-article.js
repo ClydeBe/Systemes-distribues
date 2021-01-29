@@ -12,7 +12,8 @@ $(document).ready(function(){
         type: 'get',
         success: function(response){
             //console.log(response)
-            let {price, name, imageLink,quantity,description,caracteristics,tags,category} = response;
+            let {id,price, name, imageLink,quantity,description,caracteristics,tags,category} = response;
+            $(".add-to-cart").html(`<button class="btn btn-primary" onclick="addToCart(${id},${price},'${name}','${imageLink}',${quantity})"><i class="far far-shopping-cart"></i>Add to Cart</button>`);
             $(".price").html(`${price}€`); 
             $(".item-title").html(`${name}`);
             $("#article_image").attr("src",imageLink);
