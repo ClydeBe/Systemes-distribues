@@ -155,8 +155,8 @@ function footerRender(){
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> youPrettyShop.com</a>
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="#"> youPrettyShop.com</a>
   </div>
   <!-- Copyright -->
     `);

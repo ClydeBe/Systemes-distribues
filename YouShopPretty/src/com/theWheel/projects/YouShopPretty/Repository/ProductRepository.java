@@ -103,16 +103,17 @@ public class ProductRepository {
 	public void update(Product p) {
 		errors.clear();
 		EntityTransaction et = em.getTransaction();
+		Product product = getById(p.getId());
+		product.setQuantity(p.getQuantity());
 		try {
 			et.begin();
-			em.merge(p);
+			em.merge(product);
 			et.commit();
 		}
 		catch (IllegalArgumentException e) {
 			errors.put("Not_an_entity", "Le produit n'existe pas ou a été retiré");
 			et.rollback();
 		}
-		
 	}
 
 	public void delete(long id) {

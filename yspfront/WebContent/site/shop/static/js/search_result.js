@@ -14,11 +14,11 @@ $(document).ready(function(){
         type: 'get',
         success: function(response){
             //console.log(response)
-            let {price, name, imageLink} = response;
+            let {id,price, name, imageLink} = response;
             if(response.length != 0){
                 $("#nbItems").append(`(${response.length})`);
                 for(i=0; i < response.length && i<=17; i++){
-                        let {id,price, name,imageLink} = response[i];
+                        let {id,price, name,imageLink,quantity} = response[i];
                         $('#article-list .container .row').append(`
                         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" id="product">
                         <div class="card">
@@ -27,7 +27,7 @@ $(document).ready(function(){
                         <div class="middle">
                             <a href="/${route}/${shop}/view-article.html?id=${id}" class="btn btn-prinmary"><i class="fas fa-eye"></i></a>
                             <a href="#" class="btn btn-prinmary"><i class="far fa-heart"></i></a>
-                            <a href="#" class="btn btn-prinmary"><i class="fas fa-cart-plus"></i></a>
+                            <a type="button" class="btn btn-prinmary" onclick="addToCart(${id},${price},'${name}','${imageLink}',${quantity})"><i class="fas fa-cart-plus"></i></a>
                         </div>
                         <div class="title-article">
                           <strong class="name-article">${name}</strong> 

@@ -1,19 +1,17 @@
 $(document).ready(function(){
-    navBarRender();
-    recupererCookie("JWTsessionId");
+  navBarRender();
+
+  if(document.cookie.includes('YSPsessionId')){
+    let token_cart = document.cookie.split(";").filter(e => e.includes("YSPcart"))[0].replace('YSPcart=',''); 
+    let cart_list  = atob(token_cart).split(",");
+    
+    $("#nb-items-cart").html(`${cart_list.length}`);
+  }
+
 })
 
 
-function recupererCookie(nom) {
-  nom = nom + "=";
-  var liste = document.cookie.split(';');
-  for (var i = 0; i < liste.length; i++) {
-      var c = liste[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nom) == 0) return c.substring(nom.length, c.length);
-  }
-  return null;
-}
+
 
 function navBarRender(){
   var route   = "yspfront/site"; 
@@ -86,13 +84,10 @@ function navBarRender(){
       
       $("#user-activity").html(`     
       <li class="nav-item d-inline-block">
-        <a class="nav-link" href=/${route}/${account}/login.html><i class="fas fa-shopping-cart"></i>  Cart </a>
+        <a class="nav-link" href=/${route}/${shop}/checkout.html><i class="fas fa-shopping-cart"></i>  Cart <span class="badge bg-light text-dark" id="nb-items-cart">0</span> </a>
       </li>
       <li class="nav-item d-inline-block">
-        <a class="nav-link" href=/${route}/${account}/register.html><i class="far fa-heart"></i> WishList</a>
-      </li>
-      <li class="nav-item d-inline-block">
-        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-users"></i></a>
+        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-users"></i> my Space</a>
       </li>
   `);
 
