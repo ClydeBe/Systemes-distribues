@@ -70,8 +70,10 @@ public class OrderResource {
 	
 	@DELETE
 	@RolesAllowed({"STAFF", "ADMIN"})
-	public Response deleteOrder(Order order) {
-		boolean isDeleted = orderRepository.delete(order);
+	@Path("{Id}")
+	public Response deleteOrder(@PathParam("Id") Long Id) {
+		
+		boolean isDeleted = orderRepository.delete(Id);
 		if(!isDeleted)
 			return Response.status(Status.EXPECTATION_FAILED).build();
 		return Response.status(Status.OK).build();

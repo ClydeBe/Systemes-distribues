@@ -87,7 +87,7 @@ function navBarRender(){
         <a class="nav-link" href=/${route}/${shop}/checkout.html><i class="fas fa-shopping-cart"></i>  Cart <span class="badge bg-light text-dark" id="nb-items-cart">0</span> </a>
       </li>
       <li class="nav-item d-inline-block">
-        <a class="nav-link" href=/${route}/${account}/register.html><i class="fas fa-users"></i> my Space</a>
+        <a class="nav-link" href=/${route}/${shop}/myspace.html><i class="fas fa-users"></i> my Space</a>
       </li>
   `);
 

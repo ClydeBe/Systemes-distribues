@@ -70,7 +70,7 @@ function computeTotal(){
     let cart_list  = atob(token_cart).split(",");
     let total = 0;
     let total_TVA =0;
-    
+
     $("#nb-items-cart").html(cart_list.length);
     console.log(cart_list);
 
