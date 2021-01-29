@@ -1,4 +1,4 @@
-package com.theWheel.prettyShop.heroku;
+package com.theWheel.projects.YouShopPretty.heroku;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
